@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁德时代新能源科技股份有限公司2022-12-31年年报数据</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#DC2626',
+                        neutral: '#64748B',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <i class="fa fa-line-chart text-primary text-3xl mr-3"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-primary">宁德时代新能源科技股份有限公司</h1>
+            </div>
+            <div class="flex items-center space-x-2 text-sm text-neutral">
+                <span class="hidden md:inline-block"><i class="fa fa-calendar mr-1"></i> 报告期: 2022-12-31</span>
+                <span class="hidden md:inline-block">|</span>
+                <span><i class="fa fa-file-text-o mr-1"></i> 年报</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 企业基本信息卡片 -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-custom">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fa fa-building text-primary mr-2"></i>企业基本信息
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                            <i class="fa fa-id-card-o text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral">统一社会信用代码</p>
+                            <p class="font-medium">91350902054341492Y</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                            <i class="fa fa-industry text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral">行业类型</p>
+                            <p class="font-medium">制造业</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                            <i class="fa fa-file-text text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral">报告类型</p>
+                            <p class="font-medium">年报 (2022年度)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm text-neutral">
+                    <p class="font-medium mb-1">提取逻辑说明:</p>
+                    <p>文本中提到'宁德时代新能源科技股份有限公司2022年年度报告全文'，由此关联年度报告期末日2022-12-31和报表类型年报；根据'公司主要从事动力电池、储能电池和电池回收利用产品的研发、生产和销售。根据国家统计局发布的《国民经济行业分类与代码》（GB/T 4754-2017），公司属于门类“C制造业”中的大类“C38电气机械和器材制造业”中的小类“C3841锂离子电池制造”'，可确定行业门类为制造业</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 详细数据信息 -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-custom">
+                <h2 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fa fa-info-circle text-primary mr-2"></i>详细处理信息
+                </h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-neutral uppercase tracking-wider">项目</th>
+                                <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-neutral uppercase tracking-wider">状态</th>
+                                <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-neutral uppercase tracking-wider">详细信息</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="font-medium">企业信息提取</div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full bg-success/10 text-success">成功</span>
+                                </td>
+                                <td class="px-4 py-4 text-sm text-neutral">提取完成</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="font-medium">财报三表提取</div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full bg-success/10 text-success">成功</span>
+                                </td>
+                                <td class="px-4 py-4 text-sm text-neutral">提取完成</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="font-medium">财报附注提取</div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full bg-success/10 text-success">成功</span>
+                                </td>
+                                <td class="px-4 py-4 text-sm text-neutral">提取完成</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="font-medium">表格入库</div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full bg-success/10 text-success">成功</span>
+                                </td>
+                                <td class="px-4 py-4 text-sm text-neutral">新增118行数据</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="font-medium">文档索引</div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full bg-warning/10 text-warning">等待中</span>
+                                </td>
+                                <td class="px-4 py-4 text-sm text-neutral">文档ID: 0a7f971d-503e-4af4-9ed3-74064d741912</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数据处理结果 -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-custom">
+                <h2 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fa fa-database text-primary mr-2"></i>数据处理结果
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 表格数据 -->
+                    <div class="border border-gray-100 rounded-lg p-5 hover:border-primary/30 transition-custom">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                <i class="fa fa-table text-primary"></i>
+                            </div>
+                            <h3 class="font-bold">表格数据处理</h3>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-neutral">处理状态</span>
+                            <span class="text-success font-medium text-sm">成功</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-neutral">错误信息</span>
+                            <span class="text-neutral text-sm">无</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-neutral">新增数据</span>
+                            <span class="font-medium text-sm">118行</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 附注数据 -->
+                    <div class="border border-gray-100 rounded-lg p-5 hover:border-primary/30 transition-custom">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                <i class="fa fa-sticky-note-o text-primary"></i>
+                            </div>
+                            <h3 class="font-bold">附注数据处理</h3>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-neutral">处理状态</span>
+                            <span class="text-success font-medium text-sm">成功</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-neutral">错误信息</span>
+                            <span class="text-neutral text-sm">无</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-neutral">附注数量</span>
+                            <span class="font-medium text-sm">68条</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 财务报表验证结果 -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-custom">
+                <h2 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fa fa-check-square-o text-primary mr-2"></i>财务报表验证结果
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 资产负债表 -->
+                    <div class="border border-gray-100 rounded-lg p-5 flex flex-col items-center text-center hover:border-primary/30 transition-custom">
+                        <div class="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
+                            <i class="fa fa-balance-scale text-2xl text-success"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">资产负债表 (BS)</h3>
+                        <div class="px-4 py-1 rounded-full bg-success/10 text-success text-sm font-medium mb-3">
+                            平衡
+                        </div>
+                        <p class="text-sm text-neutral">验证通过，无异常</p>
+                    </div>
+                    
+                    <!-- 利润表 -->
+                    <div class="border border-gray-100 rounded-lg p-5 flex flex-col items-center text-center hover:border-primary/30 transition-custom">
+                        <div class="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
+                            <i class="fa fa-line-chart text-2xl text-success"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">利润表 (IS)</h3>
+                        <div class="px-4 py-1 rounded-full bg-success/10 text-success text-sm font-medium mb-3">
+                            平衡
+                        </div>
+                        <p class="text-sm text-neutral">
+                            验证通过，无异常
+                        </p>
+                    </div>
+                    
+                    <!-- 现金流量表 -->
+                    <div class="border border-gray-100 rounded-lg p-5 flex flex-col items-center text-center hover:border-primary/30 transition-custom">
+                        <div class="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
+                            <i class="fa fa-money text-2xl text-success"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">现金流量表 (SCF)</h3>
+                        <div class="px-4 py-1 rounded-full bg-success/10 text-success text-sm font-medium mb-3">
+                            平衡
+                        </div>
+                        <p class="text-sm text-neutral">验证通过，无异常</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 财报三表数据访问按钮 -->
+        <section class="mb-8">
+            <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-custom">
+                <h2 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fa fa-table text-primary mr-2"></i>财报三表数据访问
+                </h2>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center p-8 border border-dashed border-gray-200 rounded-lg">
+                    <p class="text-neutral mb-4 md:mb-0 md:mr-6 text-center md:text-left">
+                        点击下方按钮查看完整的资产负债表、利润表和现金流量表详细数据
+                    </p>
+                    <a 
+                        href="https://ycnz330hlwde.feishu.cn/sheets/Ayf4sh1HshkvI3t7DH6cWqaJndf" 
+                        target="_blank" 
+                        class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-custom font-medium shadow-md hover:shadow-lg"
+                    >
+                        <i class="fa fa-external-link mr-2"></i>
+                        查看财务报表数据
+                    </a>
+                </div>
+                
+                <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm text-neutral">
+                    <i class="fa fa-info-circle mr-1"></i>
+                    数据包含资产负债表、利润表和现金流量表的详细财务数据，点击后将在新窗口打开
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm text-gray-400">© 2022 宁德时代新能源科技股份有限公司年报数据展示</p>
+                    <p class="text-xs text-gray-500 mt-1">数据提取日期: 2025-11-20</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                        <i class="fa fa-file-text-o"></i> 原始文档
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                        <i class="fa fa-download"></i> 下载数据
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                        <i class="fa fa-refresh"></i> 刷新数据
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 添加卡片悬停效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-shadow');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('transform', 'translate-y-[-5px]');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('transform', 'translate-y-[-5px]');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
