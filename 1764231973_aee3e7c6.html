@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁德时代新能源科技股份有限公司负债情况分析报告（2022-2024年）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.15.1/dist/framer-motion.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F4C81', // 深蓝色 - 代表科技和信任
+                        secondary: '#1E88E5', // 中蓝色
+                        accent: '#4CAF50', // 绿色 - 代表新能源
+                        neutral: '#F5F7FA', // 浅灰色背景
+                        dark: '#263238', // 深灰色文本
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-transform-opacity {
+                transition-property: transform, opacity;
+            }
+            .grid-bemto {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                gap: 1.5rem;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .border-gradient {
+                border-image: linear-gradient(to right, #1E88E5, #4CAF50) 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-dark font-sans">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-line-chart text-primary text-2xl"></i>
+                <span class="font-bold text-lg text-primary">宁德时代财务分析</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-sm hover:text-primary transition-colors">数据概览</a>
+                <a href="#trend" class="text-sm hover:text-primary transition-colors">趋势分析</a>
+                <a href="#structure" class="text-sm hover:text-primary transition-colors">负债结构</a>
+                <a href="#cashflow" class="text-sm hover:text-primary transition-colors">现金流分析</a>
+                <a href="#conclusion" class="text-sm hover:text-primary transition-colors">综合结论</a>
+            </div>
+            <button class="md:hidden text-primary" id="menuToggle">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white shadow-md absolute w-full" id="mobileMenu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#overview" class="py-2 text-sm hover:text-primary transition-colors">数据概览</a>
+                <a href="#trend" class="py-2 text-sm hover:text-primary transition-colors">趋势分析</a>
+                <a href="#structure" class="py-2 text-sm hover:text-primary transition-colors">负债结构</a>
+                <a href="#cashflow" class="py-2 text-sm hover:text-primary transition-colors">现金流分析</a>
+                <a href="#conclusion" class="py-2 text-sm hover:text-primary transition-colors">综合结论</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <header class="pt-24 pb-16 px-4 bg-gradient-to-br from-primary to-secondary text-white">
+        <div class="container mx-auto max-w-5xl">
+            <div class="motion-reveal">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-shadow">宁德时代新能源科技股份有限公司</h1>
+                <p class="text-xl md:text-2xl mb-6 opacity-90">负债情况分析报告</p>
+                <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                    <span class="mr-2"><i class="fa fa-calendar-o"></i></span>2022-2024年
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto max-w-5xl px-4 py-12">
+        <!-- 分析目标 -->
+        <section class="mb-16 motion-reveal">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <h2 class="text-2xl font-bold mb-6 text-primary border-l-4 border-accent pl-4">分析目标</h2>
+                <p class="text-lg leading-relaxed">
+                    本报告旨在分析宁德时代近三年负债结构、偿债能力及风险状况，数据范围涵盖2022-2024年年度财务数据，重点关注资产负债率、流动比率、速动比率、利息保障倍数及负债结构占比等关键指标。
+                </p>
+            </div>
+        </section>
+
+        <!-- 数据概览 -->
+        <section id="overview" class="mb-16">
+            <div class="text-center mb-10 motion-reveal">
+                <h2 class="text-3xl font-bold mb-3 text-primary">数据概览</h2>
+                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+
+            <!-- 关键指标卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- 负债总额 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover motion-reveal" style="transition-delay: 0.1s">
+                    <div class="text-sm text-gray-500 mb-2">负债总额 (2024)</div>
+                    <div class="flex items-end">
+                        <span class="text-3xl font-bold text-primary">5132亿</span>
+                        <span class="text-sm text-gray-500 ml-2 mb-1">元</span>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-accent mr-1"><i class="fa fa-arrow-up"></i> 3.2%</span>
+                        <span class="text-gray-500">较2023年</span>
+                    </div>
+                </div>
+
+                <!-- 资产负债率 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover motion-reveal" style="transition-delay: 0.2s">
+                    <div class="text-sm text-gray-500 mb-2">资产负债率 (2024)</div>
+                    <div class="flex items-end">
+                        <span class="text-3xl font-bold text-primary">65%</span>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-green-500 mr-1"><i class="fa fa-arrow-down"></i> 4%</span>
+                        <span class="text-gray-500">较2022年</span>
+                    </div>
+                </div>
+
+                <!-- 流动比率 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover motion-reveal" style="transition-delay: 0.3s">
+                    <div class="text-sm text-gray-500 mb-2">流动比率 (2024)</div>
+                    <div class="flex items-end">
+                        <span class="text-3xl font-bold text-primary">1.61</span>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-green-500 mr-1"><i class="fa fa-arrow-up"></i> 0.30</span>
+                        <span class="text-gray-500">较2022年</span>
+                    </div>
+                </div>
+
+                <!-- 利息保障倍数 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover motion-reveal" style="transition-delay: 0.4s">
+                    <div class="text-sm text-gray-500 mb-2">利息保障倍数 (2024)</div>
+                    <div class="flex items-end">
+                        <span class="text-3xl font-bold text-primary">17.29</span>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-gray-500">维持高位，偿债能力强劲</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 负债数据汇总表 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden motion-reveal">
+                <div class="p-6 border-b border-gray-100">
+                    <h3 class="text-xl font-bold text-primary">负债数据汇总表</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">指标</th>
+                                <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">2024年</th>
+                                <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">2023年</th>
+                                <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">2022年</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">负债总额（元）</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">513,201,949,000</td>
+                                <td class="px-6 py-4 text-sm text-right">497,284,890,500</td>
+                                <td class="px-6 py-4 text-sm text-right">424,043,189,900</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">流动负债占比</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">62%</td>
+                                <td class="px-6 py-4 text-sm text-right">58%</td>
+                                <td class="px-6 py-4 text-sm text-right">70%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">非流动负债占比</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">38%</td>
+                                <td class="px-6 py-4 text-sm text-right">42%</td>
+                                <td class="px-6 py-4 text-sm text-right">30%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">资产负债率</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">65%</td>
+                                <td class="px-6 py-4 text-sm text-right">69%</td>
+                                <td class="px-6 py-4 text-sm text-right">71%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">流动比率</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">1.61</td>
+                                <td class="px-6 py-4 text-sm text-right">1.57</td>
+                                <td class="px-6 py-4 text-sm text-right">1.31</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">速动比率</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">1.42</td>
+                                <td class="px-6 py-4 text-sm text-right">1.41</td>
+                                <td class="px-6 py-4 text-sm text-right">1.05</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">利息保障倍数</td>
+                                <td class="px-6 py-4 text-sm text-right font-medium">17.29</td>
+                                <td class="px-6 py-4 text-sm text-right">16.64</td>
+                                <td class="px-6 py-4 text-sm text-right">18.2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 趋势表现分析 -->
+        <section id="trend" class="mb-16">
+            <div class="text-center mb-10 motion-reveal">
+                <h2 class="text-3xl font-bold mb-3 text-primary">趋势表现分析</h2>
+                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- 负债总额趋势 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">负债总额趋势 (亿元)</h3>
+                    <div class="h-64">
+                        <canvas id="liabilityTrendChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-600 italic">
+                        负债总额持续增长，从2022年的4240亿元增至2024年的5132亿元，年均增长率约10%
+                    </div>
+                </div>
+
+                <!-- 资产负债率趋势 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">资产负债率趋势 (%)</h3>
+                    <div class="h-64">
+                        <canvas id="debtRatioChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-600 italic">
+                        资产负债率呈现改善趋势，从2022年的71%下降至2024年的65%
+                    </div>
+                </div>
+            </div>
+
+            <!-- 偿债能力指标 -->
+            <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                <h3 class="text-lg font-semibold mb-6 text-primary">偿债能力指标变化</h3>
+                <div class="h-80">
+                    <canvas id="solvencyIndicatorsChart"></canvas>
+                </div>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-primary mb-2">流动比率</h4>
+                        <p class="text-gray-600">从1.31提升至1.61，短期偿债能力显著改善</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-primary mb-2">速动比率</h4>
+                        <p class="text-gray-600">从1.05提升至1.42，流动性风险降低</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-primary mb-2">利息保障倍数</h4>
+                        <p class="text-gray-600">维持在16-18倍高位，利息支付能力强劲</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 负债结构分析 -->
+        <section id="structure" class="mb-16">
+            <div class="text-center mb-10 motion-reveal">
+                <h2 class="text-3xl font-bold mb-3 text-primary">负债结构分析</h2>
+                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+
+            <!-- 负债结构占比 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- 流动负债结构 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">流动负债结构 (2024)</h3>
+                    <div class="h-64 flex items-center justify-center">
+                        <canvas id="currentLiabilityChart"></canvas>
+                    </div>
+                    <div class="mt-4 space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">应付账款</span>
+                            <span class="font-medium">41%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">应付票据</span>
+                            <span class="font-medium">21%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">合同负债</span>
+                            <span class="font-medium">8-9%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">其他流动负债</span>
+                            <span class="font-medium">30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 非流动负债结构 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">非流动负债结构 (2024)</h3>
+                    <div class="h-64 flex items-center justify-center">
+                        <canvas id="nonCurrentLiabilityChart"></canvas>
+                    </div>
+                    <div class="mt-4 space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">长期借款</span>
+                            <span class="font-medium">41%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">预计负债</span>
+                            <span class="font-medium text-red-500">37%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">应付债券</span>
+                            <span class="font-medium">12%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">其他非流动负债</span>
+                            <span class="font-medium">10%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 期限结构分析 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8 motion-reveal">
+                <h3 class="text-lg font-semibold mb-6 text-primary">期限结构分析</h3>
+                <div class="h-80">
+                    <canvas id="maturityStructureChart"></canvas>
+                </div>
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-primary">
+                    <h4 class="font-semibold text-primary mb-2">匹配度评估</h4>
+                    <p class="text-gray-700">2024年流动资产占比65% vs 流动负债占比62%，匹配度良好。不存在明显的"短债长用"或"长债短用"现象，期限结构趋于合理。</p>
+                </div>
+            </div>
+
+            <!-- 利率结构和来源结构 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 利率结构分析 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">利率结构分析</h3>
+                    <div class="h-64 flex items-center justify-center">
+                        <canvas id="interestStructureChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <p class="text-gray-600 mb-2"><span class="font-medium">有息负债估算：</span>1129.23亿元</p>
+                        <p class="text-gray-600 mb-2"><span class="font-medium">有息负债占比：</span>约22%</p>
+                        <p class="text-gray-600"><span class="font-medium">无息负债占比：</span>约78%</p>
+                    </div>
+                    <div class="mt-4 p-3 bg-green-50 rounded-lg text-sm">
+                        <p class="text-gray-700"><i class="fa fa-info-circle text-accent mr-1"></i> 无息负债占比较高，反映公司对供应商和客户的议价能力强，融资成本控制良好。</p>
+                    </div>
+                </div>
+
+                <!-- 来源结构分析 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">来源结构分析</h3>
+                    <div class="h-64 flex items-center justify-center">
+                        <canvas id="sourceStructureChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <p class="text-gray-600 mb-2"><span class="font-medium">银行借款占比：</span>约20%</p>
+                        <p class="text-gray-600 mb-2"><span class="font-medium">直接融资占比：</span>约2%</p>
+                        <p class="text-gray-600"><span class="font-medium">商业信用占比：</span>约50%</p>
+                    </div>
+                    <div class="mt-4 p-3 bg-blue-50 rounded-lg text-sm">
+                        <p class="text-gray-700"><i class="fa fa-info-circle text-primary mr-1"></i> 主要依赖商业信用融资，受银行信贷政策影响相对较小，融资稳定性较高。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 现金流覆盖能力分析 -->
+        <section id="cashflow" class="mb-16">
+            <div class="text-center mb-10 motion-reveal">
+                <h2 class="text-3xl font-bold mb-3 text-primary">现金流覆盖能力分析</h2>
+                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6 text-primary">短期偿债现金流匹配</h3>
+                        <div class="h-72">
+                            <canvas id="cashflowCoverageChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p>2024年：经营活动现金流969.90亿 / 流动负债3171.72亿 = <span class="font-medium text-primary">30.6%</span></p>
+                            <p>2023年：经营活动现金流928.26亿 / 流动负债2870.01亿 = <span class="font-medium text-primary">32.3%</span></p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="p-6 bg-gray-50 rounded-lg">
+                            <h4 class="text-xl font-semibold text-primary mb-4">风险评估</h4>
+                            <p class="text-gray-700 mb-4">经营活动现金流对流动负债的覆盖能力保持在30%以上，短期偿债风险可控。</p>
+                            
+                            <div class="mt-6 space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-600">2024年现金流覆盖</span>
+                                        <span class="font-medium">30.6%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 30.6%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-600">2023年现金流覆盖</span>
+                                        <span class="font-medium">32.3%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 32.3%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 综合结论 -->
+        <section id="conclusion" class="mb-16">
+            <div class="text-center mb-10 motion-reveal">
+                <h2 class="text-3xl font-bold mb-3 text-primary">综合结论</h2>
+                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+
+            <!-- 商业洞察 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8 motion-reveal">
+                <h3 class="text-lg font-semibold mb-4 text-primary">商业洞察</h3>
+                <div class="space-y-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                            <i class="fa fa-check text-white text-xs"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-gray-700">负债结构持续优化，从以流动负债为主转向长短债均衡配置</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                            <i class="fa fa-check text-white text-xs"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-gray-700">偿债能力指标全面改善，利息覆盖能力强劲</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary flex items-center justify-center mt-0.5">
+                            <i class="fa fa-check text-white text-xs"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-gray-700">无息负债占比高达78%，产业链议价能力突出</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-primary/5 rounded-lg border-l-4 border-primary">
+                    <h4 class="font-semibold text-primary mb-2">战略意义</h4>
+                    <p class="text-gray-700">宁德时代通过优化负债结构和充分利用商业信用，实现了低成本融资，为持续的技术研发和产能扩张提供了稳定的资金支持。</p>
+                </div>
+            </div>
+
+            <!-- 行动建议 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8 motion-reveal">
+                <h3 class="text-lg font-semibold mb-4 text-primary">行动建议</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-gray-50 rounded-lg text-center">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa fa-refresh text-primary"></i>
+                        </div>
+                        <h4 class="font-semibold text-primary mb-2">优化负债期限</h4>
+                        <p class="text-sm text-gray-600">继续保持合理的负债期限结构</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg text-center">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa fa-eye text-primary"></i>
+                        </div>
+                        <h4 class="font-semibold text-primary mb-2">监控预计负债</h4>
+                        <p class="text-sm text-gray-600">密切监控预计负债的变动情况</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg text-center">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa fa-random text-primary"></i>
+                        </div>
+                        <h4 class="font-semibold text-primary mb-2">多元化融资</h4>
+                        <p class="text-sm text-gray-600">适时利用直接融资渠道优化融资结构</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风险预警 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 主要优势 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">主要优势</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-accent mt-1 mr-2"></i>
+                            <div>
+                                <span class="font-medium">融资成本优势：</span>
+                                <span class="text-gray-600">无息负债占比高达78%，显著降低财务费用</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-accent mt-1 mr-2"></i>
+                            <div>
+                                <span class="font-medium">偿债能力强劲：</span>
+                                <span class="text-gray-600">利息保障倍数超过16倍，远高于安全水平</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-accent mt-1 mr-2"></i>
+                            <div>
+                                <span class="font-medium">期限结构合理：</span>
+                                <span class="text-gray-600">负债与资产期限匹配度持续改善</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 风险预警 -->
+                <div class="bg-white rounded-xl shadow-md p-6 motion-reveal">
+                    <h3 class="text-lg font-semibold mb-4 text-primary">风险预警</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 border-l-4 border-yellow-500 bg-yellow-50">
+                            <h4 class="font-medium text-yellow-700 mb-1">中风险</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation-circle text-yellow-500 mt-1 mr-2"></i>
+                                    <span>预计负债大幅增加，需关注产品质量保证等或有负债风险</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation-circle text-yellow-500 mt-1 mr-2"></i>
+                                    <span>负债总额持续增长，需要平衡扩张速度与财务稳健性</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="p-3 border-l-4 border-blue-500 bg-blue-50">
+                            <h4 class="font-medium text-blue-700 mb-1">低风险</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fa fa-info-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>个别年份流动比率偏低，但不影响整体偿债安全</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-info-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>直接融资占比偏低，融资渠道有待进一步多元化</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-500 italic">
+                        风险提示：以上分析基于提供的财务数据，市场环境变化可能影响分析结论的有效性。建议结合行业发展趋势和宏观经济环境进行综合判断。
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto max-w-5xl px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">宁德时代财务分析报告</h3>
+                    <p class="text-white/80 mb-4">负债情况分析报告（2022-2024年）</p>
+                    <p class="text-white/60 text-sm">本报告仅供参考，不构成任何投资建议。</p>
+                </div>
+                <div class="text-right">
+                    <div class="flex justify-end space-x-4 mb-4">
+                        <a href="#" class="text-white/80 hover:text-white transition-colors">
+                            <i class="fa fa-file-pdf-o text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/80 hover:text-white transition-colors">
+                            <i class="fa fa-download text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white/80 hover:text-white transition-colors">
+                            <i class="fa fa-share-alt text-xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-white/60 text-sm">&copy; 2024 财务分析报告. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 动画效果
+        document.addEventListener('DOMContentLoaded', () => {
+            // 元素显示动画
+            const revealElements = document.querySelectorAll('.motion-reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            revealElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                revealObserver.observe(element);
+            });
+
+            // 图表初始化
+            initCharts();
+        });
+
+        // 图表初始化函数
+        function initCharts() {
+            // 负债总额趋势图
+            const liabilityTrendCtx = document.getElementById('liabilityTrendChart').getContext('2d');
+            new Chart(liabilityTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024'],
+                    datasets: [{
+                        label: '负债总额（亿元）',
+                        data: [4240, 4973, 5132],
+                        borderColor: '#0F4C81',
+                        backgroundColor: 'rgba(15, 76, 129, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `负债总额: ${context.raw}亿元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 资产负债率趋势图
+            const debtRatioCtx = document.getElementById('debtRatioChart').getContext('2d');
+            new Chart(debtRatioCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024'],
+                    datasets: [{
+                        label: '资产负债率（%）',
+                        data: [71, 69, 65],
+                        borderColor: '#E53935',
+                        backgroundColor: 'rgba(229, 57, 53, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `资产负债率: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 75,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 偿债能力指标图
+            const solvencyIndicatorsCtx = document.getElementById('solvencyIndicatorsChart').getContext('2d');
+            new Chart(solvencyIndicatorsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024'],
+                    datasets: [
+                        {
+                            label: '流动比率',
+                            data: [1.31, 1.57, 1.61],
+                            borderColor: '#0F4C81',
+                            backgroundColor: 'transparent',
+                            tension: 0.3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '速动比率',
+                            data: [1.05, 1.41, 1.42],
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'transparent',
+                            tension: 0.3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '利息保障倍数',
+                            data: [18.2, 16.64, 17.29],
+                            borderColor: '#FF9800',
+                            backgroundColor: 'transparent',
+                            tension: 0.3,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '流动比率/速动比率'
+                            },
+                            min: 0.8,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '利息保障倍数'
+                            },
+                            min: 15,
+                            max: 20,
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 流动负债结构图
+            const currentLiabilityCtx = document.getElementById('currentLiabilityChart').getContext('2d');
+            new Chart(currentLiabilityCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['应付账款', '应付票据', '合同负债', '其他流动负债'],
+                    datasets: [{
+                        data: [41, 21, 8, 30],
+                        backgroundColor: [
+                            'rgba(15, 76, 129, 0.7)',
+                            'rgba(30, 136, 229, 0.7)',
+                            'rgba(76, 175, 80, 0.7)',
+                            'rgba(200, 200, 200, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 非流动负债结构图
+            const nonCurrentLiabilityCtx = document.getElementById('nonCurrentLiabilityChart').getContext('2d');
+            new Chart(nonCurrentLiabilityCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['长期借款', '预计负债', '应付债券', '其他非流动负债'],
+                    datasets: [{
+                        data: [41, 37, 12, 10],
+                        backgroundColor: [
+                            'rgba(15, 76, 129, 0.7)',
+                            'rgba(229, 57, 53, 0.7)',
+                            'rgba(30, 136, 229, 0.7)',
+                            'rgba(200, 200, 200, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 期限结构分析图
+            const maturityStructureCtx = document.getElementById('maturityStructureChart').getContext('2d');
+            new Chart(maturityStructureCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024'],
+                    datasets: [
+                        {
+                            label: '流动负债占比',
+                            data: [70, 58, 62],
+                            backgroundColor: 'rgba(30, 136, 229, 0.7)',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: '非流动负债占比',
+                            data: [30, 42, 38],
+                            backgroundColor: 'rgba(15, 76, 129, 0.7)',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: '流动资产占比',
+                            data: [65, 63, 65],
+                            backgroundColor: 'rgba(76, 175, 80, 0.3)',
+                            borderColor: 'rgba(76, 175, 80, 1)',
+                            borderWidth: 2,
+                            type: 'line',
+                            stack: 'Stack 1',
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '负债结构占比 (%)'
+                            },
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '流动资产占比 (%)'
+                            },
+                            min: 60,
+                            max: 70,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 利率结构图
+            const interestStructureCtx = document.getElementById('interestStructureChart').getContext('2d');
+            new Chart(interestStructureCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['无息负债', '有息负债'],
+                    datasets: [{
+                        data: [78, 22],
+                        backgroundColor: [
+                            'rgba(76, 175, 80, 0.7)',
+                            'rgba(229, 57, 53, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 来源结构图
+            const sourceStructureCtx = document.getElementById('sourceStructureChart').getContext('2d');
+            new Chart(sourceStructureCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['商业信用', '银行借款', '直接融资', '其他来源'],
+                    datasets: [{
+                        data: [50, 20, 2, 28],
+                        backgroundColor: [
+                            'rgba(15, 76, 129, 0.7)',
+                            'rgba(30, 136, 229, 0.7)',
+                            'rgba(255, 152, 0, 0.7)',
+                            'rgba(200, 200, 200, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // 现金流覆盖能力图
+            const cashflowCoverageCtx = document.getElementById('cashflowCoverageChart').getContext('2d');
+            new Chart(cashflowCoverageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2024'],
+                    datasets: [
+                        {
+                            label: '经营活动现金流（亿元）',
+                            data: [928.26, 969.90],
+                            backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '流动负债（亿元）',
+                            data: [2870.01, 3171.72],
+                            backgroundColor: 'rgba(30, 136, 229, 0.7)',
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '覆盖比例',
+                            data: [32.3, 30.6],
+                            backgroundColor: 'rgba(15, 76, 129, 0.7)',
+                            type: 'line',
+                            yAxisID: 'y1',
+                            borderColor: 'rgba(15, 76, 129, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'white',
+                            pointBorderColor: 'rgba(15, 76, 129, 1)',
+                            pointBorderWidth: 2,
+                            pointRadius: 5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '金额（亿元）'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '覆盖比例 (%)'
+                            },
+                            min: 25,
+                            max: 35,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
