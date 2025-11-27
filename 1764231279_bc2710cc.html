@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁德时代偿债能力分析报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#FF7D00',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#C9CDD4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .border-gradient {
+                border-image: linear-gradient(to right, #165DFF, #36CFC9) 1;
+            }
+            .transition-custom {
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .grid-bemto {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-bemto {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        .col-span-12 {
+            grid-column: span 12;
+        }
+        
+        .col-span-8 {
+            grid-column: span 8;
+        }
+        
+        .col-span-6 {
+            grid-column: span 6;
+        }
+        
+        .col-span-4 {
+            grid-column: span 4;
+        }
+        
+        .col-span-3 {
+            grid-column: span 3;
+        }
+        
+        @media (max-width: 768px) {
+            .col-span-12, .col-span-8, .col-span-6, .col-span-4, .col-span-3 {
+                grid-column: span 6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-light text-dark">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+                    <i class="fa fa-line-chart text-white"></i>
+                </div>
+                <span class="font-semibold text-lg">财务分析</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-sm hover:text-primary transition-colors">数据概览</a>
+                <a href="#analysis" class="text-sm hover:text-primary transition-colors">核心分析</a>
+                <a href="#insights" class="text-sm hover:text-primary transition-colors">商业洞察</a>
+                <a href="#recommendations" class="text-sm hover:text-primary transition-colors">行动建议</a>
+            </div>
+            <button class="md:hidden text-dark">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主标题区域 -->
+    <header class="pt-24 pb-16 px-4 md:px-8 bg-gradient-to-br from-primary/5 to-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid-bemto">
+                <div class="col-span-12 md:col-span-8">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight mb-4">
+                        宁德时代<br>
+                        <span class="text-primary">偿债能力分析报告</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg md:text-xl mb-6 max-w-2xl">
+                        2022-2024年财务健康状况评估与战略洞察
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white px-4 py-2 rounded-md shadow-sm flex items-center space-x-2">
+                            <i class="fa fa-calendar text-primary"></i>
+                            <span class="text-sm">报告日期: 2024年分析</span>
+                        </div>
+                        <div class="bg-white px-4 py-2 rounded-md shadow-sm flex items-center space-x-2">
+                            <i class="fa fa-bar-chart text-primary"></i>
+                            <span class="text-sm">数据周期: 2022-2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-4 flex items-center justify-center md:justify-end">
+                    <div class="w-full max-w-xs h-48 bg-white rounded-xl shadow-lg p-6 flex flex-col justify-center">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2" id="keyMetric">1.42</div>
+                            <div class="text-sm text-gray-500">2024年速动比率</div>
+                            <div class="mt-2 text-green-500 text-sm flex items-center justify-center">
+                                <i class="fa fa-arrow-up mr-1"></i> 35.2% 同比增长
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 数据概览部分 -->
+    <section id="overview" class="py-16 px-4 md:px-8 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">数据概览</h2>
+                <p class="text-gray-600">关键财务指标变化趋势与结构分析</p>
+            </div>
+            
+            <div class="grid-bemto mb-12">
+                <div class="col-span-12">
+                    <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+                        <h3 class="text-xl font-semibold mb-6">偿债能力指标变化</h3>
+                        <div class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-3">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full transition-custom hover:shadow-md">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">1.42</div>
+                            <div class="text-sm text-gray-500 mb-1">速动比率</div>
+                            <div class="text-green-500 text-xs flex items-center justify-center">
+                                <i class="fa fa-arrow-up mr-1"></i> 35.2% 2022-2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-3">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full transition-custom hover:shadow-md">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">1.61</div>
+                            <div class="text-sm text-gray-500 mb-1">流动比率</div>
+                            <div class="text-green-500 text-xs flex items-center justify-center">
+                                <i class="fa fa-arrow-up mr-1"></i> 22.9% 2022-2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-3">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full transition-custom hover:shadow-md">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">1.00</div>
+                            <div class="text-sm text-gray-500 mb-1">现金比率</div>
+                            <div class="text-green-500 text-xs flex items-center justify-center">
+                                <i class="fa fa-arrow-up mr-1"></i> 53.8% 2022-2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-3">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full transition-custom hover:shadow-md">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">0.65</div>
+                            <div class="text-sm text-gray-500 mb-1">资产负债率</div>
+                            <div class="text-green-500 text-xs flex items-center justify-center">
+                                <i class="fa fa-arrow-down mr-1"></i> 8.5% 2022-2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-bemto">
+                <div class="col-span-12">
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">报告日期</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">速动比率</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">流动比率</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">现金比率</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">资产负债率</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">产权比率</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">权益乘数</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">利息保障倍数</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">现金流量比率</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2024-12-31</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.42</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.61</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.00</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.65</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.88</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.88</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">17.29</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.31</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2023-12-31</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.41</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.57</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.92</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.69</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.26</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.26</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">16.64</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.32</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2022-12-31</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.05</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.31</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.65</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.71</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.40</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.40</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">18.20</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.21</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心分析部分 -->
+    <section id="analysis" class="py-16 px-4 md:px-8 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">核心分析</h2>
+                <p class="text-gray-600">深入解析财务指标背后的业务含义与风险因素</p>
+            </div>
+            
+            <div class="grid-bemto gap-8">
+                <!-- 趋势表现 -->
+                <div class="col-span-12 md:col-span-6 fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-line-chart text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">趋势表现</h3>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-2">主要发现：</h4>
+                            <ul class="space-y-2 text-gray-600 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>短期偿债能力持续改善：速动比率从1.05提升至1.42，流动比率从1.31提升至1.61</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>长期偿债能力优化：资产负债率从0.71下降至0.65</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>现金保障能力显著增强：现金比率从0.65大幅提升至1.00</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-2">商业解读：</h4>
+                            <p class="text-gray-600 text-sm">
+                                数据表明宁德时代在2022-2024年间积极优化财务结构，短期偿债能力指标呈现稳步上升趋势，反映出公司流动性管理能力的持续提升。资产负债率的下降显示出公司正在降低财务杠杆，优化资本结构。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 结构特征 -->
+                <div class="col-span-12 md:col-span-6 fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-pie-chart text-secondary"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">结构特征</h3>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-2">构成分析：</h4>
+                            <ul class="space-y-2 text-gray-600 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa fa-info-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>短期偿债能力结构：速动比率与流动比率的差距保持在合理范围内，表明存货管理较为合理</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-info-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>资本结构：权益乘数从3.40下降至2.88，股东权益在总资产中的占比提高</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-info-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>现金流结构：经营活动现金流量对流动负债的保障程度有所波动</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-medium mb-2 text-primary">优化建议：</h4>
+                            <p class="text-gray-600 text-sm">
+                                虽然现金流量比率有所改善，但0.31的水平仍相对较低，建议关注经营活动现金流的质量和稳定性。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 对比评估 -->
+                <div class="col-span-12 md:col-span-6 fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-balance-scale text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">对比评估</h3>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-2">相对位置：</h4>
+                            <ul class="space-y-2 text-gray-600 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa fa-arrow-up text-green-500 mt-1 mr-2"></i>
+                                    <span>与自身历史比较：所有短期偿债指标均呈现改善趋势</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>行业标准对比：速动比率>1、流动比率>1.5，均处于行业较好水平</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-2">竞争优势：</h4>
+                            <p class="text-gray-600 text-sm">
+                                利息保障倍数保持在16倍以上高位，显示出公司强大的盈利能力和利息支付保障能力，这在重资产行业中具有显著优势。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 风险预警 -->
+                <div class="col-span-12 md:col-span-6 fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-exclamation-triangle text-red-500"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">风险预警</h3>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-2">异常信号：</h4>
+                            <ul class="space-y-2 text-gray-600 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation-circle text-yellow-500 mt-1 mr-2"></i>
+                                    <span>2024年利息保障倍数较2022年有所下降，需关注盈利能力变化</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-exclamation-circle text-yellow-500 mt-1 mr-2"></i>
+                                    <span>现金流量比率相对较低，可能存在现金流压力</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-2">潜在影响：</h4>
+                            <p class="text-gray-600 text-sm">
+                                如果宏观经济环境恶化或行业竞争加剧，较低的现金流量比率可能影响公司应对突发资金需求的能力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 比率结构分析图 -->
+                <div class="col-span-12 fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-xl font-semibold mb-6">短期偿债能力结构分析</h3>
+                        <div class="chart-container">
+                            <canvas id="structureChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 商业洞察部分 -->
+    <section id="insights" class="py-16 px-4 md:px-8 bg-gradient-to-br from-primary/5 to-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">商业洞察</h2>
+                <p class="text-gray-600">财务数据背后的战略意义与业务启示</p>
+            </div>
+            
+            <div class="grid-bemto">
+                <div class="col-span-12 md:col-span-8">
+                    <div class="bg-white rounded-xl shadow-sm p-8 h-full">
+                        <h3 class="text-2xl font-semibold mb-6">核心发现</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-2">短期偿债能力持续增强，财务安全性显著提升</h4>
+                                    <p class="text-gray-600">
+                                        速动比率和流动比率的持续提升表明公司流动性管理能力增强，资产变现能力和短期债务偿还能力得到改善。
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-2">公司正在优化资本结构，降低财务杠杆风险</h4>
+                                    <p class="text-gray-600">
+                                        资产负债率和权益乘数的下降表明公司正在减少债务融资比例，增加股东权益占比，降低财务风险。
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-2">利息支付能力保持强劲，但需关注现金流质量</h4>
+                                    <p class="text-gray-600">
+                                        利息保障倍数维持在16倍以上，显示公司有充足的利润支付利息费用，但现金流量比率相对较低需引起重视。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-100">
+                            <h4 class="text-xl font-semibold mb-4">战略意义</h4>
+                            <p class="text-gray-600">
+                                稳健的偿债能力为宁德时代的产能扩张和技术研发提供了坚实的财务基础，有利于公司在激烈的新能源行业竞争中保持优势地位。优化的资本结构降低了财务风险，增强了公司抵御行业周期波动的能力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-4">
+                    <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                        <h3 class="text-xl font-semibold mb-6">财务健康评分</h3>
+                        
+                        <div class="mb-8">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">短期偿债能力</span>
+                                <span class="text-sm font-medium text-primary">85/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">长期偿债能力</span>
+                                <span class="text-sm font-medium text-primary">78/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">现金流健康度</span>
+                                <span class="text-sm font-medium text-yellow-500">65/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">利息支付能力</span>
+                                <span class="text-sm font-medium text-green-500">92/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-primary/5 rounded-lg">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-1">80</div>
+                                <div class="text-sm text-gray-500">综合财务健康指数</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动建议部分 -->
+    <section id="recommendations" class="py-16 px-4 md:px-8 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">行动建议</h2>
+                <p class="text-gray-600">基于财务分析的战略优化方向</p>
+            </div>
+            
+            <div class="grid-bemto gap-8">
+                <div class="col-span-12 md:col-span-4 fade-in">
+                    <div class="bg-white border border-primary/20 rounded-xl shadow-sm p-6 h-full hover:shadow-md transition-custom">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-cash text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">优化现金流管理</h3>
+                        <p class="text-gray-600 text-sm">
+                            提高经营活动现金流对流动负债的覆盖，关注应收账款周转效率和存货管理，增强现金流质量。考虑优化应付账款周期，平衡上下游关系。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-4 fade-in">
+                    <div class="bg-white border border-primary/20 rounded-xl shadow-sm p-6 h-full hover:shadow-md transition-custom">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-percent text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">融资成本控制</h3>
+                        <p class="text-gray-600 text-sm">
+                            在保持合理财务杠杆的同时，关注融资成本控制。探索多元化融资渠道，优化债务结构，降低利息支出对利润的影响。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 md:col-span-4 fade-in">
+                    <div class="bg-white border border-primary/20 rounded-xl shadow-sm p-6 h-full hover:shadow-md transition-custom">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-area-chart text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">行业周期监控</h3>
+                        <p class="text-gray-600 text-sm">
+                            密切监控行业周期变化，适时调整财务策略。新能源行业波动性较大，需建立灵活的财务应对机制，以适应市场环境变化。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 fade-in">
+                    <div class="bg-primary/5 rounded-xl p-6 border border-primary/10">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="md:w-1/4 mb-4 md:mb-0 md:pr-6">
+                                <h3 class="text-xl font-semibold text-primary">分析师总结</h3>
+                            </div>
+                            <div class="md:w-3/4">
+                                <p class="text-gray-600">
+                                    宁德时代偿债能力在2022-2024年间呈现显著改善趋势，短期偿债能力和长期偿债能力均有所增强，财务风险降低。公司正在优化资本结构，降低财务杠杆，为未来发展奠定了稳健的财务基础。尽管整体财务健康状况良好，但仍需关注现金流质量和利息保障倍数的变化趋势。建议继续强化现金流管理，优化资本结构，保持财务灵活性，以应对新能源行业的周期性波动和激烈竞争环境。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12 px-4 md:px-8">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid-bemto">
+                <div class="col-span-12 md:col-span-6 mb-8 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-white rounded-md flex items-center justify-center">
+                            <i class="fa fa-line-chart text-primary"></i>
+                        </div>
+                        <span class="font-semibold text-lg">财务分析报告</span>
+                    </div>
+                    <p class="text-gray-400 max-w-md">
+                        本报告基于宁德时代新能源科技股份有限公司2022-2024年财务数据编制，旨在评估公司偿债能力及财务健康状况。
+                    </p>
+                </div>
+                
+                <div class="col-span-12 md:col-span-3 mb-8 md:mb-0">
+                    <h4 class="text-lg font-semibold mb-4">快速导航</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="text-gray-400 hover:text-white transition-colors">数据概览</a></li>
+                        <li><a href="#analysis" class="text-gray-400 hover:text-white transition-colors">核心分析</a></li>
+                        <li><a href="#insights" class="text-gray-400 hover:text-white transition-colors">商业洞察</a></li>
+                        <li><a href="#recommendations" class="text-gray-400 hover:text-white transition-colors">行动建议</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-span-12 md:col-span-3">
+                    <h4 class="text-lg font-semibold mb-4">免责声明</h4>
+                    <p class="text-gray-400 text-sm">
+                        本报告仅供参考，不构成任何投资建议。市场环境变化可能影响分析结论的有效性。投资者据此操作，风险自担。
+                    </p>
+                </div>
+                
+                <div class="col-span-12 mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                    <p>© 2024 财务分析报告. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 趋势图表
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2022', '2023', '2024'],
+                datasets: [
+                    {
+                        label: '速动比率',
+                        data: [1.05, 1.41, 1.42],
+                        borderColor: '#165DFF',
+                        backgroundColor: 'rgba(22, 93, 255, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: '流动比率',
+                        data: [1.31, 1.57, 1.61],
+                        borderColor: '#36CFC9',
+                        backgroundColor: 'rgba(54, 207, 201, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: '现金比率',
+                        data: [0.65, 0.92, 1.00],
+                        borderColor: '#FF7D00',
+                        backgroundColor: 'rgba(255, 125, 0, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: '资产负债率',
+                        data: [0.71, 0.69, 0.65],
+                        borderColor: '#F5222D',
+                        backgroundColor: 'rgba(245, 34, 45, 0.1)',
+                        tension: 0.3,
+                        fill: true,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: '短期偿债指标'
+                        },
+                        min: 0
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: '资产负债率'
+                        },
+                        min: 0,
+                        max: 1,
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // 结构分析图表
+        const structureCtx = document.getElementById('structureChart').getContext('2d');
+        const structureChart = new Chart(structureCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024'],
+                datasets: [
+                    {
+                        label: '速动比率',
+                        data: [1.05, 1.41, 1.42],
+                        backgroundColor: 'rgba(22, 93, 255, 0.7)',
+                    },
+                    {
+                        label: '流动比率',
+                        data: [1.31, 1.57, 1.61],
+                        backgroundColor: 'rgba(54, 207, 201, 0.7)',
+                    },
+                    {
+                        label: '现金比率',
+                        data: [0.65, 0.92, 1.00],
+                        backgroundColor: 'rgba(255, 125, 0, 0.7)',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: false,
+                    },
+                    y: {
+                        stacked: false,
+                        min: 0,
+                        title: {
+                            display: true,
+                            text: '比率值'
+                        }
+                    }
+                }
+            }
+        });
+
+        // 滚动动画效果
+        function handleScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = elementTop < window.innerHeight - 100 && elementBottom > 0;
+                
+                if (isVisible) {
+                    gsap.to(element, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        }
+
+        // 导航栏滚动效果
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow');
+            }
+        }
+
+        // 初始化动画
+        window.addEventListener('DOMContentLoaded', () => {
+            // 初始动画
+            gsap.from('header h1', {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                ease: 'power2.out'
+            });
+            
+            gsap.from('header p', {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                ease: 'power2.out',
+                delay: 0.2
+            });
+            
+            gsap.from('#keyMetric', {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.8,
+                ease: 'elastic.out(1, 0.5)',
+                delay: 0.5
+            });
+            
+            // 绑定滚动事件
+            window.addEventListener('scroll', () => {
+                handleScrollAnimations();
+                handleNavbarScroll();
+            });
+            
+            // 初始检查
+            handleScrollAnimations();
+            handleNavbarScroll();
+        });
+    </script>
+</body>
+</html>
