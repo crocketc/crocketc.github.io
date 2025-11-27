@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>比亚迪股份有限公司盈利能力分析</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Framer Motion (via framer-motion for React - use via CDN) -->
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .highlight-box {
+      border: 2px solid rgba(59, 130, 246, 0.5);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .chart-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .data-card {
+      background: white;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .data-card:hover {
+      transform: translateY(-5px);
+    }
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+<div class="container mx-auto px-6 py-10 max-w-6xl">
+  <header class="mb-12 text-center">
+    <h1 class="font-bold">比亚迪股份有限公司<br><span class="text-blue-600 text-xl">盈利能力深度分析报告</span></h1>
+    <p class="mt-4 text-lg">2022–2024 年度数据分析 | ROE · ROA · 毛利率 · 净利率</p>
+  </header>
+
+  <section id="overview" class="highlight-box bg-white rounded shadow-md mb-10 p-6">
+    <h2>📊 数据概览</h2>
+    <div class="chart-container mt-6">
+      <div class="data-card">
+        <strong>净资产收益率 (ROE)</strong><br/>
+        <span class="text-3xl font-extrabold text-blue-600">23.06%</span>（2023）
+      </div>
+      <div class="data-card">
+        <strong>总资产收益率 (ROA)</strong><br/>
+        <span class="text-3xl font-extrabold text-green-600">5.34%</span>（2023）
+      </div>
+      <div class="data-card">
+        <strong>毛利率</strong><br/>
+        <span class="text-3xl font-extrabold text-purple-600">19%</span>（2024）
+      </div>
+      <div class="data-card">
+        <strong>净利率</strong><br/>
+        <span class="text-3xl font-extrabold text-red-600">0%</span>（2024）
+      </div>
+    </div>
+  </section>
+
+  <section id="trend-analysis" class="mb-12">
+    <h2>📈 趋势表现</h2>
+    <ul class="list-disc pl-5 space-y-2 text-base">
+      <li>ROE呈“V型”波动：0.16 → <strong class="text-green-600">23.06</strong> → 0.24</li>
+      <li>ROA同步变化：0.04 → <strong class="text-green-600">5.34</strong> → 0.06</li>
+      <li>毛利率保持稳定：17% → 20% → 19%</li>
+      <li>2024年营业利润率与净利率归零，凸显费用压力</li>
+    </ul>
+  </section>
+
+  <section id="structure-feature" class="mb-12">
+    <h2>🧱 结构特征</h2>
+    <ul class="list-disc pl-5 space-y-2 text-base">
+      <li>2023年高ROE由<strong>净利率提升</strong>和<strong>资产周转效率增强</strong>共同驱动</li>
+      <li>2024年利润被期间费用完全吞噬，净利率归零</li>
+      <li>权益乘数效应明显，财务杠杆助力2023年ROE远高于ROA</li>
+    </ul>
+  </section>
+
+  <section id="comparison-assessment" class="mb-12">
+    <h2>⚖️ 对比评估</h2>
+    <ul class="list-disc pl-5 space-y-2 text-base">
+      <li>2023年盈利能力处于行业领先地位</li>
+      <li>2024年业绩大幅回落后与2022年持平</li>
+      <li>三年间毛利率波动较小，反映产品定价策略稳健</li>
+    </ul>
+  </section>
+
+  <section id="risk-warning" class="mb-12 highlight-box bg-yellow-50 border-l-4 border-yellow-500 pl-4 py-3">
+    <h2 class="text-yellow-700">⚠️ 风险预警</h2>
+    <ul class="list-disc pl-5 space-y-2 text-sm text-yellow-800">
+      <li>2024年营业利润率和净利率均为零，属严重盈利警报</li>
+      <li>盈利能力剧烈波动可能影响投资者信心及融资能力</li>
+      <li>需立即审查期间费用构成以识别异常增长源</li>
+    </ul>
+  </section>
+
+  <section id="conclusion" class="mb-12">
+    <h2>💡 综合结论</h2>
+    <p class="leading-relaxed">
+      比亚迪在2023年实现显著盈利突破，但2024年遭遇剧烈下滑。尽管毛利率维持稳定，
+      利润却被期间费用完全侵蚀，暴露企业在成本控制方面的薄弱环节。
+    </p>
+    <p class="mt-2">
+      建议管理层优先开展费用审计，并建立盈利预警机制，推动构建更可持续的盈利模式。
+    </p>
+  </section>
+
+  <footer class="footer-note">
+    © 2025 比亚迪股份有限公司 · 盈利能力分析报告 · 所有数据基于公开财务报表整理
+  </footer>
+</div>
+
+<script>
+  // GSAP 动画入口
+  gsap.from(".data-card", {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    stagger: 0.2,
+    ease: "power2.out"
+  });
+
+  gsap.from("h1, h2", {
+    scrollTrigger: "h1, h2",
+    duration: 1,
+    x: -50,
+    opacity: 0,
+    ease: "back.out(1.7)"
+  });
+</script>
+
+</body>
+</html>
