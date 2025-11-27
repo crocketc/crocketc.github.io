@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>宁德时代偿债能力分析报告</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Framer Motion via CDN (motion.dev) -->
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.umd.js"></script>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+
+    .highlight-border {
+      border: 2px solid rgba(59, 130, 246, 0.5);
+    }
+
+    h1, h2, h3 {
+      font-weight: 800;
+    }
+
+    small {
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
+
+    .grid-container {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .chart-box {
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .chart-box:hover {
+      transform: translateY(-5px);
+    }
+
+    @media (min-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10">
+
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl md:text-6xl">宁德时代偿债能力分析报告</h1>
+    <p class="mt-2 text-lg md:text-xl text-gray-600">2022 - 2024 年度数据分析</p>
+  </header>
+
+  <section id="overview" class="mb-16">
+    <h2 class="text-3xl mb-6">📊 数据概览</h2>
+    <div class="grid-container">
+      <div class="chart-box highlight-border rounded-md">
+        <h3 class="text-xl font-semibold">速动比率 Quick Ratio</h3>
+        <ul class="mt-2 space-y-1">
+          <li><strong>2024:</strong> 1.42</li>
+          <li><strong>2023:</strong> 1.41</li>
+          <li><strong>2022:</strong> 1.05</li>
+        </ul>
+        <small>反映企业短期偿债能力的核心指标。</small>
+      </div>
+
+      <div class="chart-box highlight-border rounded-md">
+        <h3 class="text-xl font-semibold">流动比率 Current Ratio</h3>
+        <ul class="mt-2 space-y-1">
+          <li><strong>2024:</strong> 1.61</li>
+          <li><strong>2023:</strong> 1.57</li>
+          <li><strong>2022:</strong> 1.31</li>
+        </ul>
+        <small>衡量企业在短期内偿还债务的能力。</small>
+      </div>
+
+      <div class="chart-box highlight-border rounded-md">
+        <h3 class="text-xl font-semibold">现金比率 Cash Ratio</h3>
+        <ul class="mt-2 space-y-1">
+          <li><strong>2024:</strong> 1.00</li>
+          <li><strong>2023:</strong> 0.92</li>
+          <li><strong>2022:</strong> 0.65</li>
+        </ul>
+        <small>最保守的流动性指标，仅考虑货币资金。</small>
+      </div>
+
+      <div class="chart-box highlight-border rounded-md">
+        <h3 class="text-xl font-semibold">资产负债率 Debt to Asset Ratio</h3>
+        <ul class="mt-2 space-y-1">
+          <li><strong>2024:</strong> 0.65</li>
+          <li><strong>2023:</strong> 0.69</li>
+          <li><strong>2022:</strong> 0.71</li>
+        </ul>
+        <small>显示总资产中有多少是通过负债融资的。</small>
+      </div>
+    </div>
+  </section>
+
+  <section id="analysis" class="mb-16">
+    <h2 class="text-3xl mb-6">🔍 核心分析</h2>
+
+    <article class="mb-10 p-6 bg-white shadow-sm rounded-md highlight-border">
+      <h3 class="text-2xl mb-4">📈 趋势表现 Trend Analysis</h3>
+      <p class="mb-2"><strong>短期偿债能力持续改善：</strong>速动比率从1.05提升至1.42，流动比率从1.31提升至1.61。</p>
+      <p class="mb-2"><strong>长期偿债能力优化：</strong>资产负债率由0.71下降到0.65。</p>
+      <p class="mb-2"><strong>现金保障能力显著增强：</strong>现金比率从0.65大幅增至1.00。</p>
+      <small>Data shows active financial restructuring and improved liquidity management.</small>
+    </article>
+
+    <article class="mb-10 p-6 bg-white shadow-sm rounded-md highlight-border">
+      <h3 class="text-2xl mb-4">🧱 结构特征 Structural Features</h3>
+      <p class="mb-2"><strong>短期偿债结构合理：</strong>速动与流动比率差值稳定，存货管理得当。</p>
+      <p class="mb-2"><strong>资本结构调整中：</strong>权益乘数从3.40降至2.88，股东权益占比上升。</p>
+      <p class="mb-2"><strong>现金流结构波动：</strong>经营性现金流对流动负债的支持略有起伏。</p>
+      <small>Suggest enhancing cash flow quality for more stable operations.</small>
+    </article>
+
+    <article class="mb-10 p-6 bg-white shadow-sm rounded-md highlight-border">
+      <h3 class="text-2xl mb-4">🏆 对比评估 Comparison Evaluation</h3>
+      <p class="mb-2"><strong>优于历史水平：</strong>所有短期偿债指标均呈上升趋势。</p>
+      <p class="mb-2"><strong>高于行业基准：</strong>速动 > 1，流动 > 1.5，处于优良区间。</p>
+      <p class="mb-2"><strong>竞争优势明显：</strong>利息保障倍数维持在16倍以上。</p>
+      <small>Strong profitability supports robust debt servicing capacity in capital-intensive industries.</small>
+    </article>
+
+    <article class="mb-10 p-6 bg-white shadow-sm rounded-md highlight-border">
+      <h3 class="text-2xl mb-4">⚠️ 风险预警 Risk Alert</h3>
+      <p class="mb-2"><strong>盈利能力略降：</strong>利息保障倍数自2022年的18.2降至2024年的17.29。</p>
+      <p class="mb-2"><strong>现金流覆盖率偏低：</strong>现金流量比率仅为0.31，存在潜在压力。</p>
+      <p class="mb-2"><strong>外部冲击敏感：</strong>若宏观环境恶化，可能影响资金应急响应能力。</p>
+      <small>Monitor macroeconomic trends and industry cycles closely.</small>
+    </article>
+  </section>
+
+  <section id="insight" class="mb-16">
+    <h2 class="text-3xl mb-6">💡 商业洞察 Business Insight</h2>
+    <ul class="space-y-3 list-disc pl-5 text-lg">
+      <li>短期偿债能力稳步上升，财务安全性增强。</li>
+      <li>公司主动降低杠杆，优化资本结构。</li>
+      <li>利息支付能力强，但需关注现金流稳定性。</li>
+      <li>稳健财务状况支撑产能扩张和技术领先优势。</li>
+    </ul>
+  </section>
+
+  <section id="action" class="mb-16">
+    <h2 class="text-3xl mb-6">✅ 行动建议 Action Plan</h2>
+    <ol class="list-decimal pl-5 space-y-3 text-lg">
+      <li>加强现金流质量管理，提高经营性净流入。</li>
+      <li>控制融资成本，在适度杠杆下寻求最优配置。</li>
+      <li>跟踪行业周期变动，灵活调整财务策略。</li>
+    </ol>
+  </section>
+
+  <footer class="pt-8 border-t border-gray-300 text-center text-gray-600 text-sm">
+    © 2025 宁德时代新能源科技股份有限公司 · 分析报告基于公开财务数据编制<br/>
+    <small>Market changes may affect the validity of conclusions.</small>
+  </footer>
+
+  <!-- Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.from("#overview .chart-box", {
+        duration: 1,
+        opacity: 0,
+        y: 50,
+        stagger: 0.2,
+        ease: "power2.out"
+      });
+
+      gsap.from("article", {
+        scrollTrigger: "article",
+        duration: 1,
+        opacity: 0,
+        x: -50,
+        stagger: 0.3,
+        ease: "back.out(1.7)"
+      });
+    });
+  </script>
+</body>
+</html>
