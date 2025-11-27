@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁德时代新能源科技股份有限公司财务分析报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.15.1/dist/framer-motion.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tesla: '#E31937',
+                        dark: '#0A0A0A',
+                        'dark-light': '#1A1A1A',
+                        'gray-custom': '#888888',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .gradient-tesla {
+                background: linear-gradient(90deg, rgba(227,25,55,1) 0%, rgba(227,25,55,0) 100%);
+            }
+            .gradient-tesla-v {
+                background: linear-gradient(180deg, rgba(227,25,55,1) 0%, rgba(227,25,55,0) 100%);
+            }
+            .bento-card {
+                @apply bg-dark-light rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-tesla/20;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- 页面加载动画 -->
+    <div id="loader" class="fixed inset-0 bg-black z-50 flex items-center justify-center">
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 border-4 border-tesla border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 text-gray-custom">加载中...</p>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-40 border-b border-tesla/30">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-tesla rounded-md flex items-center justify-center">
+                    <i class="fa fa-bolt text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">宁德时代</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-gray-custom hover:text-white transition-colors">数据概览</a>
+                <a href="#current-assets" class="text-gray-custom hover:text-white transition-colors">流动资产</a>
+                <a href="#non-current-assets" class="text-gray-custom hover:text-white transition-colors">非流动资产</a>
+                <a href="#liabilities" class="text-gray-custom hover:text-white transition-colors">负债分析</a>
+                <a href="#conclusion" class="text-gray-custom hover:text-white transition-colors">结论建议</a>
+            </nav>
+            <button class="md:hidden text-white">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="container mx-auto px-4 py-4 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-tesla rounded-md flex items-center justify-center">
+                        <i class="fa fa-bolt text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-bold">宁德时代</h1>
+                </div>
+                <button id="close-menu" class="text-white">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-xl">
+                <a href="#overview" class="text-white hover:text-tesla transition-colors py-2 border-b border-gray-800">数据概览</a>
+                <a href="#current-assets" class="text-white hover:text-tesla transition-colors py-2 border-b border-gray-800">流动资产</a>
+                <a href="#non-current-assets" class="text-white hover:text-tesla transition-colors py-2 border-b border-gray-800">非流动资产</a>
+                <a href="#liabilities" class="text-white hover:text-tesla transition-colors py-2 border-b border-gray-800">负债分析</a>
+                <a href="#conclusion" class="text-white hover:text-tesla transition-colors py-2 border-b border-gray-800">结论建议</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="container mx-auto px-4 pt-24 pb-16">
+        <!-- 报告标题 -->
+        <section class="mb-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+                    宁德时代新能源科技股份有限公司<br>
+                    <span class="text-tesla">2022-2024年度资产与负债综合分析</span>
+                </h1>
+                <div class="w-24 h-1 bg-tesla mx-auto mb-8"></div>
+                <p class="text-gray-custom text-lg max-w-2xl mx-auto">
+                    深度解析宁德时代流动资产、非流动资产及负债情况，揭示公司财务健康状况与未来发展潜力
+                </p>
+            </div>
+        </section>
+
+        <!-- 数据概览 -->
+        <section id="overview" class="mb-24">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">数据概览</h2>
+                <div class="w-16 h-1 bg-tesla mb-6"></div>
+                <p class="text-gray-custom max-w-3xl">
+                    分析目标：宁德时代新能源科技股份有限公司2022-2024年度流动资产、非流动资产及负债情况深度分析<br>
+                    数据范围：2022年12月31日、2023年12月31日、2024年12月31日三个报告期
+                </p>
+            </div>
+
+            <!-- 核心财务指标卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- 资产总计 -->
+                <div class="bento-card col-span-1 md:col-span-2 lg:col-span-2 p-6">
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-lg font-semibold text-gray-custom">资产总计</h3>
+                            <span class="text-tesla"><i class="fa fa-arrow-up"></i> 增长</span>
+                        </div>
+                        <div class="flex items-end space-x-2 mb-2">
+                            <span class="text-4xl md:text-5xl font-bold">7866.58</span>
+                            <span class="text-gray-custom mb-1">亿元</span>
+                        </div>
+                        <div class="text-sm text-gray-custom mt-auto">
+                            <div class="flex items-center mb-1">
+                                <span>2022: 6009.52亿元</span>
+                                <span class="ml-2 px-2 py-0.5 bg-gray-800 rounded text-xs">+30.9%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>2023: 7171.68亿元</span>
+                                <span class="ml-2 px-2 py-0.5 bg-gray-800 rounded text-xs">+19.3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 流动资产合计 -->
+                <div class="bento-card p-6">
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-lg font-semibold text-gray-custom">流动资产合计</h3>
+                            <span class="text-tesla"><i class="fa fa-arrow-up"></i> 增长</span>
+                        </div>
+                        <div class="flex items-end space-x-2 mb-2">
+                            <span class="text-3xl md:text-4xl font-bold">5101.42</span>
+                            <span class="text-gray-custom mb-1">亿元</span>
+                        </div>
+                        <div class="text-sm text-gray-custom mt-auto">
+                            <div class="flex items-center">
+                                <span>占总资产: 64.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 非流动资产合计 -->
+                <div class="bento-card p-6">
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-lg font-semibold text-gray-custom">非流动资产合计</h3>
+                            <span class="text-tesla"><i class="fa fa-arrow-up"></i> 增长</span>
+                        </div>
+                        <div class="flex items-end space-x-2 mb-2">
+                            <span class="text-3xl md:text-4xl font-bold">2765.16</span>
+                            <span class="text-gray-custom mb-1">亿元</span>
+                        </div>
+                        <div class="text-sm text-gray-custom mt-auto">
+                            <div class="flex items-center">
+                                <span>占总资产: 35.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 负债合计 -->
+                <div class="bento-card p-6">
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-lg font-semibold text-gray-custom">负债合计</h3>
+                            <span class="text-tesla"><i class="fa fa-arrow-up"></i> 增长</span>
+                        </div>
+                        <div class="flex items-end space-x-2 mb-2">
+                            <span class="text-3xl md:text-4xl font-bold">5132.02</span>
+                            <span class="text-gray-custom mb-1">亿元</span>
+                        </div>
+                        <div class="text-sm text-gray-custom mt-auto">
+                            <div class="flex items-center">
+                                <span>2022-2024增幅: 21%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 资产负债率 -->
+                <div class="bento-card col-span-1 md:col-span-2 p-6">
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-lg font-semibold text-gray-custom">资产负债率</h3>
+                            <span class="text-green-500"><i class="fa fa-arrow-down"></i> 改善</span>
+                        </div>
+                        <div class="flex items-end space-x-2 mb-2">
+                            <span class="text-4xl md:text-5xl font-bold text-tesla">65.24%</span>
+                        </div>
+                        <div class="text-sm text-gray-custom mt-auto">
+                            <div class="flex items-center mb-1">
+                                <span>2022: 70.56%</span>
+                                <span class="ml-2 px-2 py-0.5 bg-gray-800 rounded text-xs">-5.32%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>2023: 69.34%</span>
+                                <span class="ml-2 px-2 py-0.5 bg-gray-800 rounded text-xs">-4.10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 资产负债趋势图 -->
+            <div class="mt-12 bento-card p-6">
+                <h3 class="text-xl font-semibold mb-6">资产负债规模趋势</h3>
+                <div class="h-80">
+                    <canvas id="balanceSheetChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 流动资产情况分析 -->
+        <section id="current-assets" class="mb-24">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">流动资产情况分析</h2>
+                <div class="w-16 h-1 bg-tesla mb-6"></div>
+                <p class="text-gray-custom max-w-3xl">
+                    宁德时代呈现"以货币资金为主导、应收账款和存货为辅的重货币模式"，货币资金占比持续保持在50%以上，显示公司资金储备充裕。
+                </p>
+            </div>
+
+            <!-- 流动资产结构 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bento-card md:col-span-2 p-6">
+                    <h3 class="text-xl font-semibold mb-6">流动资产结构</h3>
+                    <div class="h-80">
+                        <canvas id="currentAssetsChart"></canvas>
+                    </div>
+                </div>
+                <div class="bento-card p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">结构特征</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <span class="font-medium">货币资金主导</span>
+                                    <p class="text-sm text-gray-custom">占流动资产比例从49%提升至59%</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <span class="font-medium">存货管理改善</span>
+                                    <p class="text-sm text-gray-custom">存货占比从20%下降至12%</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <span class="font-medium">应收款项融资激增</span>
+                                    <p class="text-sm text-gray-custom">三年增幅达181%</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <span class="font-medium">应收账款占比下降</span>
+                                    <p class="text-sm text-gray-custom">从15%下降至13%</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 重点科目分析 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- 货币资金 -->
+                <div class="bento-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold">货币资金</h3>
+                        <span class="px-2 py-1 bg-tesla/20 text-tesla text-xs rounded-full">59.5%</span>
+                    </div>
+                    <div class="flex items-end space-x-2 mb-4">
+                        <span class="text-3xl font-bold">3035.12</span>
+                        <span class="text-gray-custom mb-1">亿元</span>
+                    </div>
+                    <div class="flex items-center text-sm text-green-500 mb-4">
+                        <i class="fa fa-arrow-up mr-1"></i> 58.8% 增长 (2022-2024)
+                    </div>
+                    <p class="text-sm text-gray-custom">
+                        规模庞大且持续增长，现金储备充足，短期偿债能力强劲
+                    </p>
+                </div>
+
+                <!-- 应收账款 -->
+                <div class="bento-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold">应收账款</h3>
+                        <span class="px-2 py-1 bg-gray-800 text-gray-custom text-xs rounded-full">12.6%</span>
+                    </div>
+                    <div class="flex items-end space-x-2 mb-4">
+                        <span class="text-3xl font-bold">641.36</span>
+                        <span class="text-gray-custom mb-1">亿元</span>
+                    </div>
+                    <div class="flex items-center text-sm text-green-500 mb-4">
+                        <i class="fa fa-arrow-up mr-1"></i> 10.6% 增长 (2022-2024)
+                    </div>
+                    <p class="text-sm text-gray-custom">
+                        增长相对温和，占流动资产比例从15%下降至13%，显示回款管理有所改善
+                    </p>
+                </div>
+
+                <!-- 存货 -->
+                <div class="bento-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold">存货</h3>
+                        <span class="px-2 py-1 bg-gray-800 text-gray-custom text-xs rounded-full">11.7%</span>
+                    </div>
+                    <div class="flex items-end space-x-2 mb-4">
+                        <span class="text-3xl font-bold">598.36</span>
+                        <span class="text-gray-custom mb-1">亿元</span>
+                    </div>
+                    <div class="flex items-center text-sm text-red-500 mb-4">
+                        <i class="fa fa-arrow-down mr-1"></i> 22.0% 下降 (2022-2024)
+                    </div>
+                    <p class="text-sm text-gray-custom">
+                        存货管理效率提升，占流动资产比例从20%下降至12%，周转效率明显改善
+                    </p>
+                </div>
+
+                <!-- 应收款项融资 -->
+                <div class="bento-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold">应收款项融资</h3>
+                        <span class="px-2 py-1 bg-gray-800 text-gray-custom text-xs rounded-full">10.4%</span>
+                    </div>
+                    <div class="flex items-end space-x-2 mb-4">
+                        <span class="text-3xl font-bold">533.10</span>
+                        <span class="text-gray-custom mb-1">亿元</span>
+                    </div>
+                    <div class="flex items-center text-sm text-green-500 mb-4">
+                        <i class="fa fa-arrow-up mr-1"></i> 181% 增长 (2022-2024)
+                    </div>
+                    <p class="text-sm text-gray-custom">
+                        规模显著增长，成为重要流动资产组成部分，需关注其质量和回收风险
+                    </p>
+                </div>
+            </div>
+
+            <!-- 营运效率和短期偿债能力 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 营运效率分析 -->
+                <div class="bento-card p-6">
+                    <h3 class="text-xl font-semibold mb-6">营运效率分析</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">应收账款管理</span>
+                                <span class="text-green-500"><i class="fa fa-arrow-up"></i> 改善</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">存货管理</span>
+                                <span class="text-green-500"><i class="fa fa-arrow-up"></i> 显著改善</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">流动资产运用效率</span>
+                                <span class="text-green-500"><i class="fa fa-arrow-up"></i> 持续优化</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 短期偿债能力 -->
+                <div class="bento-card p-6">
+                    <h3 class="text-xl font-semibold mb-6">短期偿债能力</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">流动比率</span>
+                                <span class="font-medium">1.61 (2024)</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-2">1.31(2022) → 1.57(2023) → 1.61(2024)</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">速动比率</span>
+                                <span class="font-medium">1.42 (2024)</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-2">1.05(2022) → 1.41(2023) → 1.42(2024)</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">现金比率</span>
+                                <span class="font-medium">1.00 (2024)</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-2">0.65(2022) → 0.92(2023) → 1.00(2024)</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-4 bg-gray-800/50 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="mt-1 mr-3 text-green-500"><i class="fa fa-info-circle"></i></div>
+                            <div>
+                                <span class="font-medium">风险评估</span>
+                                <p class="text-sm text-gray-custom">短期偿债能力从"中等"提升至"强劲"水平</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 非流动资产情况分析 -->
+        <section id="non-current-assets" class="mb-24">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">非流动资产情况分析</h2>
+                <div class="w-16 h-1 bg-tesla mb-6"></div>
+                <p class="text-gray-custom max-w-3xl">
+                    非流动资产占比保持在35%左右，三年增长29.7%，低于流动资产增长31.6%，结构相对稳定，与公司重资产特性相符。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bento-card md:col-span-2 p-6">
+                    <div class="flex flex-col h-full">
+                        <h3 class="text-xl font-semibold mb-6">非流动资产占比趋势</h3>
+                        <div class="h-80">
+                            <canvas id="nonCurrentAssetsChart"></canvas>
+                        </div>
+                        <div class="mt-6 text-sm text-gray-custom">
+                            <p>数据表明公司保持了相对稳定的非流动资产配置比例，在业务扩张过程中保持了资产结构的合理性。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bento-card p-6">
+                    <h3 class="text-xl font-semibold mb-6">关键指标</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">非流动资产占比</span>
+                                <span class="font-medium">35.16%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-1">2022: 35.48% → 2023: 37.29% → 2024: 35.16%</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">三年增长率</span>
+                                <span class="font-medium">29.7%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-1">低于流动资产增长率(31.6%)</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-800">
+                            <h4 class="font-medium mb-3">资产配置策略</h4>
+                            <p class="text-sm text-gray-custom">
+                                公司在业务扩张过程中保持了资产结构的合理性，非流动资产占比保持相对稳定，体现了稳健的资产配置策略。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 负债情况分析 -->
+        <section id="liabilities" class="mb-24">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">负债情况分析</h2>
+                <div class="w-16 h-1 bg-tesla mb-6"></div>
+                <p class="text-gray-custom max-w-3xl">
+                    宁德时代呈现"长短债结构均衡的稳健型融资模式"，流动负债与非流动负债比例相对均衡，资产负债率持续下降，财务风险逐步降低。
+                </p>
+            </div>
+
+            <!-- 负债总体结构 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="bento-card p-6">
+                    <h3 class="text-xl font-semibold mb-6">负债规模与结构</h3>
+                    <div class="h-80">
+                        <canvas id="liabilitiesChart"></canvas>
+                    </div>
+                </div>
+                <div class="bento-card p-6">
+                    <h3 class="text-xl font-semibold mb-6">重点科目变化</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">应付账款</span>
+                                <span class="text-green-500"><i class="fa fa-arrow-up"></i> 38.5%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-1">945.35 → 1309.77 亿元</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">应付票据</span>
+                                <span class="text-red-500"><i class="fa fa-arrow-down"></i> 46.6%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-1">1262.29 → 673.56 亿元</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">长期借款</span>
+                                <span class="text-green-500"><i class="fa fa-arrow-up"></i> 37.5%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-1">590.99 → 812.38 亿元</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-tesla h-2 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-custom">预计负债</span>
+                                <span class="text-red-500"><i class="fa fa-arrow-up"></i> 265%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom mb-1">196.97 → 719.27 亿元</div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 偿债能力与结构性风险分析 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bento-card md:col-span-1 p-6">
+                    <h3 class="text-xl font-semibold mb-6">关键偿债指标</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-custom">资产负债率</span>
+                                <span class="text-tesla font-medium">65.24%</span>
+                            </div>
+                            <div class="text-sm text-gray-custom">持续下降趋势</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-custom">利息保障倍数</span>
+                                <span class="text-green-500 font-medium">17.29</span>
+                            </div>
+                            <div class="text-sm text-gray-custom">保持较高水平</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-custom">有息负债占比</span>
+                                <span class="text-green-500 font-medium">合理</span>
+                            </div>
+                            <div class="text-sm text-gray-custom">财务风险可控</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bento-card md:col-span-2 p-6">
+                    <h3 class="text-xl font-semibold mb-6">负债结构三维度分析</h3>
+                    <div class="h-80">
+                        <canvas id="liabilityStructureChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 期限结构分析 -->
+            <div class="bento-card p-6">
+                <h3 class="text-xl font-semibold mb-6">期限结构分析</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-gray-800/30 rounded-lg">
+                        <h4 class="font-medium mb-2">2022</h4>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-custom">流动负债</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2 mb-4">
+                            <div class="bg-tesla h-2 rounded-full" style="width: 70%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-custom">非流动负债</span>
+                            <span>30%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-custom/10 rounded-lg border border-tesla/30">
+                        <h4 class="font-medium mb-2">2023</h4>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-custom">流动负债</span>
+                            <span>58%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2 mb-4">
+                            <div class="bg-tesla h-2 rounded-full" style="width: 58%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-custom">非流动负债</span>
+                            <span>42%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-800/30 rounded-lg">
+                        <h4 class="font-medium mb-2">2024</h4>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-custom">流动负债</span>
+                            <span>62%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2 mb-4">
+                            <div class="bg-tesla h-2 rounded-full" style="width: 62%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-custom">非流动负债</span>
+                            <span>38%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 38%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-gray-800/50 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-green-500"><i class="fa fa-check-circle"></i></div>
+                        <div>
+                            <span class="font-medium">匹配度评估</span>
+                            <p class="text-sm text-gray-custom">负债期限与资产期限匹配度良好，无明显的"短债长用"风险</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 综合结论与风险提示 -->
+        <section id="conclusion" class="mb-16">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-2">综合结论与风险提示</h2>
+                <div class="w-16 h-1 bg-tesla mb-6"></div>
+                <p class="text-gray-custom max-w-3xl">
+                    宁德时代在2022-2024年间展现了稳健的财务表现，资产规模持续扩张的同时，财务结构不断优化。公司保持了充足的流动性，负债结构合理，偿债能力强劲，整体财务状况健康。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <!-- 主要优势 -->
+                <div class="bento-card p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mr-4">
+                            <i class="fa fa-plus-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">主要优势</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-green-500"><i class="fa fa-check-circle"></i></div>
+                            <div>
+                                <span class="font-medium">资金实力雄厚</span>
+                                <p class="text-sm text-gray-custom">货币资金充裕，现金比率达到1.0，短期偿债能力极强</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-green-500"><i class="fa fa-check-circle"></i></div>
+                            <div>
+                                <span class="font-medium">负债结构优化</span>
+                                <p class="text-sm text-gray-custom">资产负债率持续下降，负债期限结构合理</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-green-500"><i class="fa fa-check-circle"></i></div>
+                            <div>
+                                <span class="font-medium">营运效率提升</span>
+                                <p class="text-sm text-gray-custom">存货管理明显改善，应收账款控制良好</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-green-500"><i class="fa fa-check-circle"></i></div>
+                            <div>
+                                <span class="font-medium">融资能力强大</span>
+                                <p class="text-sm text-gray-custom">多元化的融资渠道和良好的信用状况</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 潜在风险 -->
+                <div class="bento-card p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-500 mr-4">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">潜在风险</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-red-500"><i class="fa fa-exclamation-circle"></i></div>
+                            <div>
+                                <span class="font-medium">预计负债快速增长</span>
+                                <p class="text-sm text-gray-custom">预计负债三年增长265%，需要关注其具体构成和潜在风险</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-red-500"><i class="fa fa-exclamation-circle"></i></div>
+                            <div>
+                                <span class="font-medium">应收款项融资大幅增加</span>
+                                <p class="text-sm text-gray-custom">应收款项融资规模激增，需关注其质量和回收风险</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-red-500"><i class="fa fa-exclamation-circle"></i></div>
+                            <div>
+                                <span class="font-medium">资产扩张速度</span>
+                                <p class="text-sm text-gray-custom">资产规模持续快速扩张，需要关注投资回报率和资产使用效率</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-3 text-red-500"><i class="fa fa-exclamation-circle"></i></div>
+                            <div>
+                                <span class="font-medium">行业周期风险</span>
+                                <p class="text-sm text-gray-custom">作为新能源企业，需关注行业政策变化和技术迭代风险</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 战略意义与行动建议 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bento-card md:col-span-1 p-6">
+                    <h3 class="text-xl font-semibold mb-6">战略意义</h3>
+                    <p class="text-gray-custom">
+                        宁德时代的财务表现体现了其在新能源行业的领先地位和强大的经营管理能力。充裕的资金储备为未来的技术研发和市场扩张提供了有力支撑，优化的负债结构增强了公司的抗风险能力。
+                    </p>
+                </div>
+                <div class="bento-card md:col-span-2 p-6">
+                    <h3 class="text-xl font-semibold mb-6">行动建议</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-800/30 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-lightbulb-o"></i></div>
+                                <div>
+                                    <span class="font-medium">监控预计负债</span>
+                                    <p class="text-sm text-gray-custom">持续监控预计负债的具体构成和风险敞口</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-gray-800/30 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-lightbulb-o"></i></div>
+                                <div>
+                                    <span class="font-medium">加强应收管理</span>
+                                    <p class="text-sm text-gray-custom">加强应收款项融资的质量管理</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-gray-800/30 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-lightbulb-o"></i></div>
+                                <div>
+                                    <span class="font-medium">优化负债结构</span>
+                                    <p class="text-sm text-gray-custom">保持当前的负债结构优化趋势</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-gray-800/30 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla"><i class="fa fa-lightbulb-o"></i></div>
+                                <div>
+                                    <span class="font-medium">提升资产效率</span>
+                                    <p class="text-sm text-gray-custom">关注资产使用效率，确保投资回报率</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-light border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center space-x-2 mb-6 md:mb-0">
+                    <div class="w-8 h-8 bg-tesla rounded-md flex items-center justify-center">
+                        <i class="fa fa-bolt text-white"></i>
+                    </div>
+                    <h2 class="text-xl font-bold">宁德时代财务分析报告</h2>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-custom hover:text-white transition-colors"><i class="fa fa-download"></i></a>
+                    <a href="#" class="text-gray-custom hover:text-white transition-colors"><i class="fa fa-share-alt"></i></a>
+                    <a href="#" class="text-gray-custom hover:text-white transition-colors"><i class="fa fa-print"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-sm text-gray-custom">
+                <p>注：本分析基于提供的财务数据，市场环境变化可能影响分析结论的有效性。建议结合行业趋势和公司战略进行综合判断。</p>
+                <p class="mt-4">© 2024 财务分析报告. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-tesla w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 transition-opacity duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 隐藏加载动画
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('opacity-0');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 300);
+            }, 1000);
+
+            // 移动端菜单切换
+            const menuButton = document.querySelector('button.md\\:hidden');
+            const closeButton = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+
+            closeButton.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+
+            // 返回顶部按钮
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.replace('opacity-0', 'opacity-100');
+                } else {
+                    backToTopButton.classList.replace('opacity-100', 'opacity-0');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 图表初始化
+            initCharts();
+
+            // 添加滚动动画
+            addScrollAnimations();
+        });
+
+        // 图表初始化函数
+        function initCharts() {
+            // 设置Chart默认样式
+            Chart.defaults.color = '#888888';
+            Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+            Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+            
+            // 资产负债规模趋势图
+            const balanceSheetCtx = document.getElementById('balanceSheetChart').getContext('2d');
+            new Chart(balanceSheetCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024'],
+                    datasets: [
+                        {
+                            label: '资产总计',
+                            data: [6009.52, 7171.68, 7866.58],
+                            borderColor: '#E31937',
+                            backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: '负债合计',
+                            data: [4240.43, 4972.85, 5132.02],
+                            borderColor: '#888888',
+                            backgroundColor: 'rgba(136, 136, 136, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + ' 亿元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '亿';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 流动资产结构图
+            const currentAssetsCtx = document.getElementById('currentAssetsChart').getContext('2d');
+            new Chart(currentAssetsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['货币资金', '应收账款', '存货', '应收款项融资', '其他流动资产'],
+                    datasets: [{
+                        data: [3035.12, 641.36, 598.36, 533.10, 293.48],
+                        backgroundColor: [
+                            '#E31937',
+                            '#3a86ff',
+                            '#8338ec',
+                            '#fb8500',
+                            '#6d6d6d'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} 亿元 (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            // 非流动资产占比趋势图
+            const nonCurrentAssetsCtx = document.getElementById('nonCurrentAssetsChart').getContext('2d');
+            new Chart(nonCurrentAssetsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024'],
+                    datasets: [{
+                        label: '非流动资产占比',
+                        data: [35.48, 37.29, 35.16],
+                        backgroundColor: 'rgba(227, 25, 55, 0.7)',
+                        borderColor: '#E31937',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 负债规模与结构图
+            const liabilitiesCtx = document.getElementById('liabilitiesChart').getContext('2d');
+            new Chart(liabilitiesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['应付账款', '应付票据', '长期借款', '预计负债'],
+                    datasets: [{
+                        label: '2022',
+                        data: [945.35, 1262.29, 590.99, 196.97],
+                        backgroundColor: 'rgba(136, 136, 136, 0.7)',
+                    }, {
+                        label: '2024',
+                        data: [1309.77, 673.56, 812.38, 719.27],
+                        backgroundColor: 'rgba(227, 25, 55, 0.7)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + ' 亿元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '亿';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 负债结构三维度分析图
+            const liabilityStructureCtx = document.getElementById('liabilityStructureChart').getContext('2d');
+            new Chart(liabilityStructureCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['流动负债占比', '有息负债占比', '长期借款占比', '应付账款占比', '预计负债占比'],
+                    datasets: [{
+                        label: '2022',
+                        data: [70, 45, 25, 38, 8],
+                        fill: true,
+                        backgroundColor: 'rgba(136, 136, 136, 0.2)',
+                        borderColor: 'rgba(136, 136, 136, 0.8)',
+                        pointBackgroundColor: 'rgba(136, 136, 136, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(136, 136, 136, 1)'
+                    }, {
+                        label: '2024',
+                        data: [62, 40, 30, 42, 25],
+                        fill: true,
+                        backgroundColor: 'rgba(227, 25, 55, 0.2)',
+                        borderColor: 'rgba(227, 25, 55, 0.8)',
+                        pointBackgroundColor: 'rgba(227, 25, 55, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(227, 25, 55, 1)'
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            borderWidth: 2
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#888888'
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: '#888888',
+                                showLabelBackdrop: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 添加滚动动画
+        function addScrollAnimations() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // 为所有bento-card添加动画
+            document.querySelectorAll('.bento-card').forEach(card => {
+                card.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
+                observer.observe(card);
+            });
+
+            // 为所有section标题添加动画
+            document.querySelectorAll('section h2').forEach(title => {
+                title.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700', 'delay-100');
+                observer.observe(title);
+            });
+
+            // 自定义动画类
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.animate-in').forEach(el => {
+                    el.classList.remove('opacity-0', 'translate-y-8', 'translate-y-4');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
