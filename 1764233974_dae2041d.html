@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>比亚迪股份有限公司盈利能力分析报告</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.0.0/dist/framer-motion.umd.min.js"></script>
+  <style>
+    .bemto-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .highlight-border {
+      border: 2px solid rgba(255, 167, 38, 0.5);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .text-large {
+      font-size: 4rem;
+      line-height: 1;
+    }
+    .text-small {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <header class="p-8 text-center">
+    <h1 class="text-5xl font-bold">比亚迪股份有限公司</h1>
+    <p class="text-2xl mt-2">盈利能力分析报告</p>
+  </header>
+
+  <main class="container mx-auto p-8">
+    <!-- 数据概览 -->
+    <section class="bemto-grid">
+      <div class="bg-gray-800 highlight-border p-6 rounded-lg">
+        <h2 class="text-3xl font-bold">数据概览</h2>
+        <p class="mt-4">分析目标：比亚迪股份有限公司2022-2024年度盈利能力深度分析</p>
+        <p class="mt-2">数据范围：2022年12月31日、2023年12月31日、2024年12月31日</p>
+      </div>
+
+      <div class="bg-gray-800 highlight-border p-6 rounded-lg">
+        <h2 class="text-3xl font-bold">财务指标汇总表</h2>
+        <table class="w-full mt-4 text-left">
+          <thead>
+            <tr>
+              <th class="pb-2">报告日期</th>
+              <th>ROE</th>
+              <th>ROA</th>
+              <th>营业利润率</th>
+              <th>毛利率</th>
+              <th>净利率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-12-31</td>
+              <td>0.24</td>
+              <td>0.06</td>
+              <td>0</td>
+              <td>0.19</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>2023-12-31</td>
+              <td>23.06</td>
+              <td>5.34</td>
+              <td>0.06</td>
+              <td>0.20</td>
+              <td>0.05</td>
+            </tr>
+            <tr>
+              <td>2022-12-31</td>
+              <td>0.16</td>
+              <td>0.04</td>
+              <td>0.05</td>
+              <td>0.17</td>
+              <td>0.04</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 核心分析 -->
+    <section class="bemto-grid mt-8">
+      <div class="bg-gray-800 highlight-border p-6 rounded-lg">
+        <h2 class="text-3xl font-bold">趋势表现</h2>
+        <p class="mt-4">ROE呈现"V型"波动：2022年0.16 → 2023年23.06 → 2024年0.24</p>
+        <p class="mt-2">ROA同步波动：2022年0.04 → 2023年5.34 → 2024年0.06</p>
+        <p class="mt-2">毛利率相对稳定：2022年0.17 → 2023年0.20 → 2024年0.19</p>
+      </div>
+
+      <div class="bg-gray-800 highlight-border p-6 rounded-lg">
+        <h2 class="text-3xl font-bold">风险预警</h2>
+        <p class="mt-4">2024年营业利润率和净利率同时为零，这是严重的盈利预警信号。</p>
+        <p class="mt-2">从2023年高盈利到2024年零盈利的剧烈波动。</p>
+      </div>
+    </section>
+
+    <!-- 综合结论 -->
+    <section class="bemto-grid mt-8">
+      <div class="bg-gray-800 highlight-border p-6 rounded-lg">
+        <h2 class="text-3xl font-bold">综合结论</h2>
+        <p class="mt-4">比亚迪在2023年实现了显著的盈利突破，ROE达到23.06的优异水平。</p>
+        <p class="mt-2">2024年出现严重的盈利下滑，营业利润率和净利率降至零。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center p-8 bg-gray-800 mt-8">
+    <p class="text-small">注：以上分析基于提供的财务数据，建议结合具体业务背景和行业环境进行进一步解读。</p>
+  </footer>
+
+  <script>
+    gsap.from(".bemto-grid", { opacity: 0, y: 20, duration: 1, stagger: 0.2 });
+    const motionDiv = document.querySelector(".bemto-grid");
+    motionDiv.animate([{ transform: "translateY(20px)" }, { transform: "translateY(0)" }], {
+      duration: 1000,
+      easing: "ease-in-out",
+    });
+  </script>
+</body>
+</html>
