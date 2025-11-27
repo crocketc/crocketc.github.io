@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比亚迪股份有限公司盈利能力分析报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        
+        :root {
+            --primary-color: rgba(0, 123, 255, 0.1);
+            --accent-color: rgba(255, 193, 7, 0.1);
+            --success-color: rgba(40, 167, 69, 0.1);
+            --warning-color: rgba(220, 53, 69, 0.1);
+            --primary-border: rgba(0, 123, 255, 0.3);
+            --accent-border: rgba(255, 193, 7, 0.3);
+            --success-border: rgba(40, 167, 69, 0.3);
+            --warning-border: rgba(220, 53, 69, 0.3);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+        }
+        
+        .bemto-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .grid-col-1 { grid-column: span 1; }
+        .grid-col-2 { grid-column: span 2; }
+        .grid-col-3 { grid-column: span 3; }
+        .grid-col-4 { grid-column: span 4; }
+        .grid-col-5 { grid-column: span 5; }
+        .grid-col-6 { grid-column: span 6; }
+        .grid-col-7 { grid-column: span 7; }
+        .grid-col-8 { grid-column: span 8; }
+        .grid-col-9 { grid-column: span 9; }
+        .grid-col-10 { grid-column: span 10; }
+        .grid-col-11 { grid-column: span 11; }
+        .grid-col-12 { grid-column: span 12; }
+        
+        @media (max-width: 1024px) {
+            .bemto-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .bemto-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .financial-card {
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .financial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-highlight {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.15), rgba(0, 123, 255, 0.05));
+            border-left: 4px solid var(--primary-border);
+        }
+        
+        .trend-up {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.05));
+            border-left: 4px solid var(--success-border);
+        }
+        
+        .trend-down {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.15), rgba(220, 53, 69, 0.05));
+            border-left: 4px solid var(--warning-border);
+        }
+        
+        .chart-bar {
+            transition: all 0.5s ease;
+        }
+        
+        .chart-bar:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4 md:px-8 lg:px-16">
+    <div class="max-w-7xl mx-auto">
+        <!-- 标题区域 -->
+        <header class="bemto-grid mb-16">
+            <div class="grid-col-12">
+                <div class="text-center mb-6">
+                    <h1 class="text-5xl md:text-7xl font-black mb-4 text-blue-900 tracking-tight">盈利能力分析报告</h1>
+                    <p class="text-xl md:text-2xl font-light text-gray-600">BYD Company Limited · 比亚迪股份有限公司</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-yellow-400 mx-auto mt-6 rounded-full"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 关键指标概览 -->
+        <section class="bemto-grid mb-20">
+            <div class="grid-col-12 mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-2">关键财务指标</h2>
+                <p class="text-lg text-gray-500">Key Financial Metrics · 2022-2024</p>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-6 lg:grid-col-3">
+                <div class="financial-card bg-white rounded-2xl p-6 metric-highlight">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">净资产收益率</h3>
+                    <p class="text-sm text-gray-500 mb-4">ROE</p>
+                    <div class="flex items-end">
+                        <span class="text-4xl md:text-5xl font-black text-blue-700">23.06</span>
+                        <span class="text-xl font-bold text-green-600 ml-2">%</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">2023年峰值</p>
+                </div>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-6 lg:grid-col-3">
+                <div class="financial-card bg-white rounded-2xl p-6 metric-highlight">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">总资产收益率</h3>
+                    <p class="text-sm text-gray-500 mb-4">ROA</p>
+                    <div class="flex items-end">
+                        <span class="text-4xl md:text-5xl font-black text-blue-700">5.34</span>
+                        <span class="text-xl font-bold text-green-600 ml-2">%</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">2023年峰值</p>
+                </div>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-6 lg:grid-col-3">
+                <div class="financial-card bg-white rounded-2xl p-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">毛利率</h3>
+                    <p class="text-sm text-gray-500 mb-4">Gross Margin</p>
+                    <div class="flex items-end">
+                        <span class="text-4xl md:text-5xl font-black text-gray-800">19-20</span>
+                        <span class="text-xl font-bold text-gray-600 ml-2">%</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">相对稳定</p>
+                </div>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-6 lg:grid-col-3">
+                <div class="financial-card bg-white rounded-2xl p-6 trend-down">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">净利率</h3>
+                    <p class="text-sm text-gray-500 mb-4">Net Margin</p>
+                    <div class="flex items-end">
+                        <span class="text-4xl md:text-5xl font-black text-red-600">0</span>
+                        <span class="text-xl font-bold text-red-600 ml-2">%</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">2024年异常</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 财务数据表格 -->
+        <section class="bemto-grid mb-20">
+            <div class="grid-col-12">
+                <div class="financial-card bg-white rounded-2xl p-6 md:p-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">财务指标汇总</h2>
+                    <p class="text-lg text-gray-500 mb-8">Financial Metrics Summary</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="pb-4 font-semibold text-gray-700">报告日期</th>
+                                    <th class="pb-4 font-semibold text-gray-700">净资产收益率(ROE)</th>
+                                    <th class="pb-4 font-semibold text-gray-700">总资产收益率(ROA)</th>
+                                    <th class="pb-4 font-semibold text-gray-700">营业利润率</th>
+                                    <th class="pb-4 font-semibold text-gray-700">毛利率</th>
+                                    <th class="pb-4 font-semibold text-gray-700">净利率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-4 font-medium text-gray-800">2024-12-31</td>
+                                    <td class="py-4 text-gray-600">0.24</td>
+                                    <td class="py-4 text-gray-600">0.06</td>
+                                    <td class="py-4 text-red-500 font-medium">0</td>
+                                    <td class="py-4 text-gray-600">0.19</td>
+                                    <td class="py-4 text-red-500 font-medium">0</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 bg-blue-50">
+                                    <td class="py-4 font-medium text-blue-800">2023-12-31</td>
+                                    <td class="py-4 text-blue-700 font-semibold">23.06</td>
+                                    <td class="py-4 text-blue-700 font-semibold">5.34</td>
+                                    <td class="py-4 text-blue-700 font-semibold">0.06</td>
+                                    <td class="py-4 text-blue-700 font-semibold">0.20</td>
+                                    <td class="py-4 text-blue-700 font-semibold">0.05</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 font-medium text-gray-800">2022-12-31</td>
+                                    <td class="py-4 text-gray-600">0.16</td>
+                                    <td class="py-4 text-gray-600">0.04</td>
+                                    <td class="py-4 text-gray-600">0.05</td>
+                                    <td class="py-4 text-gray-600">0.17</td>
+                                    <td class="py-4 text-gray-600">0.04</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 趋势分析 -->
+        <section class="bemto-grid mb-20">
+            <div class="grid-col-12 mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-2">趋势表现</h2>
+                <p class="text-lg text-gray-500">Trend Performance Analysis</p>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-8">
+                <div class="financial-card bg-white rounded-2xl p-6 md:p-8">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">ROE V型波动</h3>
+                <p class="text-lg text-gray-600 mb-6">净资产收益率呈现"V型"波动: 2022年0.16 → 2023年23.06 → 2024年0.24</p>
+                
+                <div class="flex items-end h-48 mt-8 space-x-4 md:space-x-8">
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="chart-bar w-full bg-gradient-to-b from-gray-300 to-gray-400 rounded-t-md" style="height: 30%"></div>
+                        <span class="mt-2 font-medium text-gray-700">2022</span>
+                        <span class="text-sm text-gray-500">0.16</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="chart-bar w-full bg-gradient-to-b from-blue-400 to-blue-600 rounded-t-md" style="height: 100%"></div>
+                        <span class="mt-2 font-medium text-blue-700">2023</span>
+                        <span class="text-sm text-blue-600 font-semibold">23.06</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="chart-bar w-full bg-gradient-to-b from-gray-300 to-gray-400 rounded-t-md" style="height: 32%"></div>
+                        <span class="mt-2 font-medium text-gray-700">2024</span>
+                        <span class="text-sm text-gray-500">0.24</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-4">
+                <div class="financial-card bg-white rounded-2xl p-6 h-full">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">商业解读</h3>
+                    <p class="text-gray-600 mb-4">数据表明2023年是比亚迪盈利能力的高峰期，各项盈利指标均达到显著水平。</p>
+                    <p class="text-gray-600">2024年虽然毛利率保持相对稳定，但净利率和营业利润率降至零，显示出企业在费用控制或非经营性支出方面可能存在较大压力。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结构特征 -->
+        <section class="bemto-grid mb-20">
+            <div class="grid-col-12 mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-2">结构特征</h2>
+                <p class="text-lg text-gray-500">Structural Features</p>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-6">
+                <div class="financial-card bg-white rounded-2xl p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">杜邦分析洞察</h3>
+                
+                <div class="space-y-4">
+                    <div class="p-4 rounded-lg border-l-4 border-green-400 bg-green-50">
+                        <p class="font-medium text-green-800">高ROE(23.06)主要源于较高的净利率(0.05)和资产周转效率</p>
+                    </div>
+                    
+                    <div class="p-4 rounded-lg border-l-4 border-yellow-400 bg-yellow-50">
+                        <p class="font-medium text-yellow-800">2024年结构异常：毛利率(0.19)与净利率(0)之间存在巨大差距</p>
+                    </div>
+                    
+                    <div class="p-4 rounded-lg border-l-4 border-blue-400 bg-blue-50">
+                        <p class="font-medium text-blue-800">权益乘数效应：2023年ROE显著高于ROA，显示有效运用了财务杠杆</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-col-12 md:grid-col-6">
+                <div class="financial-card bg-white rounded-2xl p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">优化建议</h3>
+                <div class="p-4 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                        <p class="text-gray-700 mb-3">重点关注2024年期间费用的构成和增长原因</p>
+                        <p class="text-gray-700 mb-3">优化成本结构，恢复正常的盈利水平</p>
+                        <p class="text-gray-700">建立长期盈利稳定性机制</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 风险预警 -->
+        <section class="bemto-grid mb-20">
+            <div class="grid-col-12 mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-2">风险预警</h2>
+                <p class="text-lg text-gray-500">Risk Alerts</p>
+            </div>
+            
+            <div class="grid-col-12">
+                <div class="financial-card bg-white rounded-2xl p-6 md:p-8 trend-down">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-2xl mr-4"></i>
+                        <h3 class="text-2xl md:text-3xl font-bold text-red-700">异常信号</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 rounded-lg bg-red-50 border border-red-200">
+                            <p class="font-medium text-red-800">2024年营业利润率和净利率同时为零</p>
+                    </div>
+                    
+                    <div class="p-4 rounded-lg bg-red-50 border border-red-200">
+                        <p class="font-medium text-red-800">从2023年高盈利到2024年零盈利的剧烈波动</p>
+                    </div>
+                    
+                    <div class="p-4 rounded-lg bg-orange-50 border border-orange-200">
+                            <p class="font-medium text-orange-800">毛利率保持但最终利润为零，表明期间费用大幅上升</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-4 rounded-lg bg-gray-100">
+                        <p class="font-medium text-gray-700">潜在影响：如果2024年的盈利状况持续，将严重影响股东回报、企业估值和融资能力</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="bemto-grid">
+            <div class="grid-col-12 mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-2">综合结论</h2>
+                <p class="text-lg text-gray-500">Comprehensive Conclusion</p>
+            </div>
+            
+            <div class="grid-col-12">
+                <div class="financial-card bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 md:p-12 text-white">
+                    <h3 class="text-2xl md:text-4xl font-bold mb-6">商业洞察</h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-xl font-bold mb-2">核心发现</h4>
+                        <p class="text-lg opacity-90">比亚迪在2023年实现了显著的盈利突破，ROE达到23.06的优异水平</p>
+                        <p class="text-lg opacity-90 mt-2">2024年出现严重的盈利下滑，营业利润率和净利率降至零</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-bold mb-2">战略意义</h4>
+                        <p class="text-lg opacity-90">2023年的优异表现证明企业具备强大的盈利潜力</p>
+                    </div>
+                    
+                    <div class="pt-6 border-t border-blue-400">
+                        <h4 class="text-xl font-bold mb-4">行动建议</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-3 rounded-lg bg-blue-400 bg-opacity-30">
+                                <p class="font-medium">立即分析2024年期间费用的具体构成和增长原因</p>
+                    </div>
+                    
+                    <div class="p-3 rounded-lg bg-blue-400 bg-opacity-30">
+                                <p class="font-medium">制定费用控制措施，恢复正常的盈利水平</p>
+                            </div>
+                            
+                            <div class="p-3 rounded-lg bg-blue-400 bg-opacity-30">
+                                <p class="font-medium">建立盈利预警机制，防止类似剧烈波动再次发生</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 脚注 -->
+        <footer class="mt-16 pt-8 border-t border-gray-300">
+            <p class="text-center text-gray-500 text-sm">注：以上分析基于提供的财务数据，建议结合具体业务背景和行业环境进行进一步解读。</p>
+            <p class="text-center text-gray-400 text-xs mt-2">盈利能力分析报告 · BYD Company Limited · 2022-2024</p>
+        </footer>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // 页面加载动画
+        gsap.from("header h1", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+        
+        gsap.from("header p", {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            ease: "power3.out"
+        });
+        
+        // 卡片入场动画
+        gsap.utils.toArray(".financial-card").forEach(card => {
+            gsap.from(card, {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+            scrollTrigger: {
+                trigger: card,
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+        
+        // 条形图动画
+        gsap.utils.toArray(".chart-bar").forEach(bar => {
+            gsap.from(bar, {
+                duration: 1.5,
+                height: 0,
+                ease: "power3.out",
+            scrollTrigger: {
+                trigger: bar,
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+        
+        // 表格行动画
+        gsap.from("tbody tr", {
+            duration: 1,
+            x: -50,
+                opacity: 0,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: "table",
+                start: "top 70%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+    </script>
+</body>
+</html>
